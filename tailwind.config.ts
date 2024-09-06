@@ -12,6 +12,21 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        blink: {
+          '0%': { opacity: '0.2' },
+          '20%': { opacity: '1' },
+          '100%': { opacity: '0.2' },
+        },
+      },
+      animation: {
+        blink: 'blink 1.4s infinite both',
+      },
+      fontFamily: {
+        body: ['var(--font-pt-sans)'],
+        subtitle: ['var(--font-open-sans)'],
+        title: ['var(--font-cooper-hewitt)'],
+      },
     },
   },
   plugins: [],
