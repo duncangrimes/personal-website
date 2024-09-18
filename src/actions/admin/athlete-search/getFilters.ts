@@ -1,6 +1,6 @@
 'use server'
 
-import { Filter, FilterOption} from "@/types/defitions"
+import { Filter } from "@/types/defitions"
 import toKebab from "@/utils/toKebab";
 import prisma from "@/lib/prisma";
 // import authenticateAdmin from "@/actions/auth/authenticateAdmin";

@@ -163,7 +163,7 @@ async function deleteLocations(locations) {
           firstName: athlete.firstName,
           lastName: athlete.lastName,
           email: athlete.email,
-          image: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/duncan-EjvBmhvaSdclRjtdyHTBMMeqdkpiCS.jpeg',
+          image: '/rostr/rostr-athlete-profile.jpeg',
           athlete: {
             create: {
               university: { connect: { id: university.id } },
