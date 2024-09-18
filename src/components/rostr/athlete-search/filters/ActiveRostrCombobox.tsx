@@ -1,40 +1,54 @@
 'use client'
 
+import getAllAdminRecruitRostrs from '@/actions/admin/recruit-rostrs/getAllAdminRecruitRostrs'
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { use, useEffect, useState } from 'react'
-import { Rostr } from '@/types/defitions'
+import { AdminRecruitRostr } from '@/types/definitions'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { selectedRostrAtom, rostrsAtom } from '@/lib/state'
-import { defaultRostrs } from '~/public/data/rostrs'
+import { adminRostrWithRecruitsAtom } from '@/lib/state'
+import getRostrWithAthleteIds from '@/actions/admin/recruit-rostrs/getRostrWithAthleteIds'
+import { match } from 'assert'
 
 export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
+  const [rostrs, setRostrs] = useState<AdminRecruitRostr[]>([]);
     
   const [query, setQuery] = useState('')
-  const [selectedRostr, setSelectedRostr] = useRecoilState(selectedRostrAtom)
-  const [rostrs, setRostrs] = useRecoilState(rostrsAtom)
+  const [selectedRostr, setSelectedRostr] = useState<AdminRecruitRostr | null>(null)
+  const setRostrWithRecruits = useSetRecoilState(adminRostrWithRecruitsAtom)
   
   useEffect(() => {
     const fetchRostrs = async () => {
       try {
-          setRostrs(defaultRostrs);
-          
+          const fetchedRostrs = await getAllAdminRecruitRostrs();
+          setRostrs(fetchedRostrs);
           // Set the default selected rostr if available
           if(rostrId) {
-              const matchingRostr = rostrs.find((rostr) => rostr.id === rostrId);
+              const matchingRostr = fetchedRostrs.find((rostr) => rostr.id === rostrId);
               if (matchingRostr) {
                 setSelectedRostr(matchingRostr);
               }
           }
-          else if (!selectedRostr && rostrs.length > 0) {
-            setSelectedRostr(rostrs[0]);
+          else if (!selectedRostr && fetchedRostrs.length > 0) {
+            setSelectedRostr(fetchedRostrs[0]);
           }
       } catch (error) {
       }
     };
     fetchRostrs();
   }, []);
+
+  useEffect(() => {
+    const fetchRostrWithRecruits = async () => {
+        if (selectedRostr) {
+            const rostrWithRecruits = await getRostrWithAthleteIds(selectedRostr.id);
+            setRostrWithRecruits(rostrWithRecruits);
+        }
+    }
+    fetchRostrWithRecruits();
+  }, [selectedRostr]);
+
 
   const filteredRostrs =
     query === ''
@@ -51,7 +65,7 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
               'w-80 rounded-lg border-none bg-white/20 py-1.5 pr-8 pl-3 text-sm/6 text-white',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
             )}
-            displayValue={(rostr: Rostr) => rostr?.position || ''}
+            displayValue={(rostr: AdminRecruitRostr) => rostr?.position || ''}
             onChange={(event) => setQuery(event.target.value)}
           />
           <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">

@@ -1,5 +1,8 @@
-import { selectedAthleteAtom, selectedRostrAtom } from "@/lib/state";
-import { Athlete } from "@/types/defitions";
+import addAthleteToAdminRecruitRostr from "@/actions/admin/athlete-search/addAthleteToAdminRecruitRostr"
+import getRostrWithAthleteIds from "@/actions/admin/recruit-rostrs/getRostrWithAthleteIds"
+import removeRecruitFromRostr from "@/actions/admin/athlete-search/removeRecruitFromRostr"
+import { adminRostrWithRecruitsAtom, selectedAthleteAtom } from "@/lib/state"
+import { AthleteAfterSignup } from "@/types/defitions"
 import { Button, Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
@@ -9,35 +12,45 @@ import toast from "react-hot-toast"
 import { useRecoilState, useRecoilValue } from "recoil"
 import LoadingDots from "@/components/ui/LoadingDots"
 
-export default function ProfileRow({ athlete }: {athlete: Athlete }) {
-    const [rostr, setRostr] = useRecoilState(selectedRostrAtom);
+export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) {
+    const [selectedAthlete, setSelectedAthlete] = useRecoilState(selectedAthleteAtom);
+    const [rostr, setRostr] = useRecoilState(adminRostrWithRecruitsAtom);
     const [onRostr, setOnRostr] = useState(false);
-    const [isPending, startTransition] = useTransition();
 
-    const selectedAthlete = useRecoilValue(selectedAthleteAtom);
     const [isSelected, setIsSelected] = useState(false);
+
+
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         if (selectedAthlete && athlete.id === selectedAthlete.id) {
             setIsSelected(true);
+            const headingElement = document.getElementById(`resume-header`);
+            if (headingElement) {
+                headingElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
         } else {
             setIsSelected(false);
         }
     }, [selectedAthlete]);
 
+
+
     useEffect(() => {
         if (rostr && athlete) {
-          const isAthleteInRostr = rostr.athletes.some(athlete => athlete.id === athlete.id);
-          setOnRostr(isAthleteInRostr);
+        const isAthleteInRostr = rostr.recruits.some(recruit => recruit.athlete.id === athlete.id);
+        setOnRostr(isAthleteInRostr);
         } else {
-          setOnRostr(true); 
+        setOnRostr(true); 
         }
-      }, [rostr]);
+    }, [rostr]);
 
     return (
         <div
             key={athlete.id}
             className={`flex flex-row justify-between text-black items-start p-4 border-b border-black ${isSelected ? 'bg-green-100' : 'bg-gray-200'} cursor-pointer`} 
+            onClick={() => setSelectedAthlete(athlete)}
         >
             <div className="flex flex-row">
                 <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full mr-4 w-20 h-20 object-cover" />
@@ -63,7 +76,7 @@ export default function ProfileRow({ athlete }: {athlete: Athlete }) {
                             {/* <p><span className="">Desired Locations (not shown):</span></p> */}
                             <Disclosure as="div" className="" defaultOpen={isSelected}>
                                 <DisclosureButton className="group inline-flex min-w-24 text-start items-end justify-start text-purple-950 ">
-                                     <ChevronDownIcon className="size-5 mb-[1px] fill-purple-950 -rotate-90 group-data-[hover]:fill-purple-950/50 group-data-[open]:mb-[2px] group-data-[open]:rotate-0" />
+                                    <ChevronDownIcon className="size-5 mb-[1px] fill-purple-950 -rotate-90 group-data-[hover]:fill-purple-950/50 group-data-[open]:mb-[2px] group-data-[open]:rotate-0" />
 
                                     <p className="text-base font-extralight text-purple-950 group-data-[hover]:text-purple-950/50">
                                     Desired Locations
@@ -97,17 +110,21 @@ export default function ProfileRow({ athlete }: {athlete: Athlete }) {
                 if (rostr){
                     startTransition(() => {
                         if (onRostr){
-                            setRostr({
-                                ...rostr,
-                                athletes: rostr.athletes.filter(a => a.id !== athlete.id)
-                            })
+                            const removeAthleteFromRostr = async () => {
+                                await removeRecruitFromRostr(athlete.id, rostr.id);
+                                const updatedRostr = await getRostrWithAthleteIds(rostr.id);
+                                setRostr(updatedRostr);
+                            }
+                            removeAthleteFromRostr();
                             toast.success('Athlete removed from Rostr');
                         }
                         else{
-                            setRostr({
-                                ...rostr,
-                                athletes: [...rostr.athletes, athlete]
-                            })
+                            const addAthleteToRostr = async () => {
+                                await addAthleteToAdminRecruitRostr(athlete.id, rostr.id);
+                                const updatedRostr = await getRostrWithAthleteIds(rostr.id);
+                                setRostr(updatedRostr);
+                            }
+                            addAthleteToRostr();
                             toast.success('Athlete added to Rostr');
                         }
                     })

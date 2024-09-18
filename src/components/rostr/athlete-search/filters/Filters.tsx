@@ -14,28 +14,30 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import OneFilter from './OneFilter'
-import { Athlete, Filter, FilterOption } from '@/types/defitions'
+import { AthleteAfterSignup, Filter, FilterOption } from '@/types/definitions'
 import { useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { filterOptionAtomFamily, activeFiltersSelector, allFilterKeysAtom, matchingAthletesAtomFamily, matchingAthletesCountSelectorFamily, selectedAthleteAtom, isPendingAtomFamily } from '@/lib/state'
+import { filterOptionAtomFamily, activeFiltersSelector, allFilterKeysAtom, matchingAthletesAtomFamily, selectedAthleteAtom, totalResultsAtom, pageNumberAtom, isPendingAtomFamily } from '@/lib/state'
 import toKebab from '@/utils/toKebab'
 import ActiveFilters from './ActiveFilters'
-import searchAthletes from '@/utils/search/searchAthletes'
+import searchAthletes from '@/actions/admin/athlete-search/searchAthletes'
+import countFilteredAthleteResults from '@/actions/admin/athlete-search/countFilteredAthleteResults'
 import ActiveRostrCombobox from './ActiveRostrCombobox'
-import getFilters from '@/utils/search/getFilters'
-import { athletes } from '~/public/data/athletes'
+import getFilters from '@/actions/admin/athlete-search/getFilters'
 
 export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
 
   const [filters, setFilters] = useState<Filter[]>([]);
   const setAllFilterKeys = useSetRecoilState(allFilterKeysAtom);
   const setMatchingAthletes = useSetRecoilState(matchingAthletesAtomFamily('athlete-search'));
-  const resultCount = useRecoilValue(matchingAthletesCountSelectorFamily('athlete-search'));
   const setSelectedAthlete = useSetRecoilState(selectedAthleteAtom);
+  const setTotalResults = useSetRecoilState(totalResultsAtom);
+  const setPageNumber = useSetRecoilState(pageNumberAtom);
   const setIsPending = useSetRecoilState(isPendingAtomFamily('athlete-search-results'));
   const activeFilters = useRecoilValue(activeFiltersSelector);
 
   // Initialize all filters
   const initializeFilters = useRecoilCallback(({ set }) => async () => {
+    setTotalResults(0);
     const fetchedFilters: Filter[] = await getFilters();
     setFilters(fetchedFilters);
 
@@ -57,9 +59,12 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
   useEffect(() => {
     const fetchAthletes = async () => {
         
-        const matchingAthletes: Athlete[] = searchAthletes(activeFilters, athletes);
+        const totalMatches = await countFilteredAthleteResults(activeFilters);
+        const athletes: AthleteAfterSignup[] = await searchAthletes(activeFilters);
+        setTotalResults(totalMatches);
         setSelectedAthlete(null);
-        setMatchingAthletes(matchingAthletes);
+        setMatchingAthletes(athletes);
+        setPageNumber(1);
     };
     setIsPending(true);
     fetchAthletes();

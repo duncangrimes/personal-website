@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  firstName     String?
+  lastName      String?
+  email         String?   @unique
+  emailVerified DateTime?
+  phone         String?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  role          Role?
+  athlete       Athlete?
+  employer      Employer?
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Athlete {
+  id          String       @id @default(cuid())
+  userId      String       @unique
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  universityId     String?
+  university  University?   @relation(fields: [universityId], references: [id])
+  gradYear    String?
+  gradMonth   String?
+  sportId     String?
+  sport       Sport?         @relation(fields: [sportId], references: [id])
+  majors      Major[]
+  minors      Minor[]
+  gpa         Float?
+  hometown    Hometown?
+  desiredLocations DesiredLocation[]
+  resume      String?
+  linkedIn    String?
+  video       String?
+  ethnicity   String @default("Prefer not to answer")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  filledRostrs AdminRecruit[]
+
+  @@index([universityId])
+  @@index([sportId])
+}
+
+model Employer {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName String?
+  phone       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Role {
+  ATHLETE
+  EMPLOYER
+  ADMIN
+}
+
+model InterestedAthlete {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String  @unique
+  phone       String?
+  university  String
+  year        String
+  sport       String
+  referral    String?
+  ethnicity   String @default("Prefer not to answer")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InterestedEmployer {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  companyName String
+  email       String  @unique
+  phone       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Subject {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  majors      Major[]
+  minors      Minor[]
+}
+
+model University {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  state    String?
+  athletes Athlete[]
+}
+
+model Sport {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  athletes Athlete[]
+}
+
+model Major {
+  athleteId String
+  subjectId String
+  athlete   Athlete @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([athleteId, subjectId])
+  @@index([athleteId])
+  @@index([subjectId])
+}
+
+model Minor {
+  athleteId String
+  subjectId String
+  athlete   Athlete @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([athleteId, subjectId])
+  @@index([athleteId])
+  @@index([subjectId])
+}
+
+model Location {
+  id                 String    @id @default(cuid())
+  city               String
+  state              String @default("")
+  country            String @default("US")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  hometownAthletes   Hometown[]
+  desiredByAthletes  DesiredLocation[]
+
+  @@unique([city, state, country])
+}
+
+model Hometown {
+  athleteId String @unique
+  locationId String
+  athlete   Athlete @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+  location  Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@id([athleteId, locationId])
+  @@index([athleteId])
+  @@index([locationId])
+}
+
+model DesiredLocation {
+  athleteId String
+  locationId String
+  athlete   Athlete @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+  location  Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@id([athleteId, locationId])
+  @@index([athleteId])
+  @@index([locationId])
+}
+
+model AdminRecruitRostr {
+  id          String   @id @default(cuid())
+  position    String
+  companyName String?
+  location    String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  recruits    AdminRecruit[] @relation("RecruitsRostr")
+  placedRecruits AdminRecruit[] @relation("Placement")
+}
+
+model AdminRecruit {
+  adminRostrId     String
+  rostr            AdminRecruitRostr @relation("RecruitsRostr", fields: [adminRostrId], references: [id], onDelete: Cascade)
+  athleteId        String
+  athlete          Athlete           @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+  placementId      String?
+  placement        AdminRecruitRostr? @relation("Placement", fields: [placementId], references: [id], onDelete: Cascade)
+  createdAt        DateTime @default(now())
+
+  @@id([adminRostrId, athleteId])
+  @@index([adminRostrId])
+  @@index([athleteId])
+  @@index([placementId])
+}
