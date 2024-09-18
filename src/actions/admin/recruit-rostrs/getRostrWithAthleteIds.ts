@@ -1,7 +1,7 @@
 'use server'
 // import authenticateAdmin from "@/actions/auth/authenticateAdmin";
 import prisma from "@/lib/prisma";
-import { AdminRostrWithAthleteIds } from "@/types/definitions";
+import { AdminRostrWithAthleteIds } from "@/types/defitions";
 import { ServerError } from "@/types/exceptions";
 
 export default async function getRostrWithAthleteIds(id: string){
