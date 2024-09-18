@@ -5,7 +5,7 @@ import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOption
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { use, useEffect, useState } from 'react'
-import { AdminRecruitRostr } from '@/types/definitions'
+import { AdminRecruitRostr } from '@/types/defitions'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { adminRostrWithRecruitsAtom } from '@/lib/state'
 import getRostrWithAthleteIds from '@/actions/admin/recruit-rostrs/getRostrWithAthleteIds'

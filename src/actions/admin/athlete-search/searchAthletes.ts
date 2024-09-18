@@ -2,7 +2,7 @@
 
 // import authenticateAdmin from '@/actions/auth/authenticateAdmin';
 import prisma from '@/lib/prisma';
-import { AthleteAfterSignup, FilterOption } from '@/types/definitions';
+import { AthleteAfterSignup, FilterOption } from '@/types/defitions';
 import { ServerError } from '@/types/exceptions';
 import locationToString from '@/utils/locationToString';
 
@@ -157,6 +157,7 @@ async function searchAthletes(filters: FilterOption[], page: number = 1): Promis
     } ) as AthleteAfterSignup);
   }
   catch(error){
+    console.error(error);
     throw new ServerError('Failed to search athletes')
   }
 }

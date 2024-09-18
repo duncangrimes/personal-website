@@ -1,11 +1,11 @@
 'use server'
-import { FilterOption } from "@/types/definitions";
+import { FilterOption } from "@/types/defitions";
 import prisma from "@/lib/prisma";
-import {auth} from "@/lib/auth";
-import authenticateAdmin from "@/actions/auth/authenticateAdmin";
+// import {auth} from "@/lib/auth";
+// import authenticateAdmin from "@/actions/auth/authenticateAdmin";
 
 export default async function countFilteredAthleteResults(filters: FilterOption[]){
-    await authenticateAdmin();
+    // await authenticateAdmin();
     
     const conditions: any[] = [];
     const uniConditions: any[] = [];

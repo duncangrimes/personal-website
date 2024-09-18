@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { Role, AthleteAfterSignup, FilterOption, AdminRecruitRostr, AdminRostrWithAthleteIds, Location } from '@/types/definitions';
+import { Role, AthleteAfterSignup, FilterOption, AdminRecruitRostr, AdminRostrWithAthleteIds, Location } from '@/types/defitions';
 import { atomFamily } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 import { University } from '@/types/defitions';

@@ -2,7 +2,7 @@ import addAthleteToAdminRecruitRostr from "@/actions/admin/athlete-search/addAth
 import getRostrWithAthleteIds from "@/actions/admin/recruit-rostrs/getRostrWithAthleteIds"
 import removeRecruitFromRostr from "@/actions/admin/athlete-search/removeRecruitFromRostr"
 import { adminRostrWithRecruitsAtom, selectedAthleteAtom } from "@/lib/state"
-import { AthleteAfterSignup } from "@/types/defitions"
+import { AthleteAfterSignup, AdminRecruit } from "@/types/defitions"
 import { Button, Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
@@ -39,7 +39,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
 
     useEffect(() => {
         if (rostr && athlete) {
-        const isAthleteInRostr = rostr.recruits.some(recruit => recruit.athlete.id === athlete.id);
+        const isAthleteInRostr = rostr.recruits.some((recruit: any) => recruit.athlete.id === athlete.id);
         setOnRostr(isAthleteInRostr);
         } else {
         setOnRostr(true); 
@@ -81,7 +81,6 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
                                     <p className="text-base font-extralight text-purple-950 group-data-[hover]:text-purple-950/50">
                                     Desired Locations
                                     </p>
-
                                 </DisclosureButton>
                                 <DisclosurePanel className="ml-4 text-sm/5 flex flex-col text-purple-950">
                                 {athlete.desiredLocations.map(location => <span key={location}>{location}</span>)}

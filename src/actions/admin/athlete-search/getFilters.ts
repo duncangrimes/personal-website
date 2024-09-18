@@ -1,14 +1,13 @@
 'use server'
 
-import { auth } from "@/lib/auth"
-import { Filter, FilterOption} from "@/types/definitions"
+import { Filter, FilterOption} from "@/types/defitions"
 import toKebab from "@/utils/toKebab";
 import prisma from "@/lib/prisma";
-import authenticateAdmin from "@/actions/auth/authenticateAdmin";
+// import authenticateAdmin from "@/actions/auth/authenticateAdmin";
 import { ServerError } from "@/types/exceptions";
 
 export default async function getFilters(): Promise<Filter[]> {
-    await authenticateAdmin();
+    // await authenticateAdmin();
 
     try {
         const universities = await prisma.university.findMany({

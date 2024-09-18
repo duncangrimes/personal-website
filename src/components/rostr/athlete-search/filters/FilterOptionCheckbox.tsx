@@ -1,7 +1,7 @@
 'use client'
 
 import { filterOptionAtomFamily } from "@/lib/state";
-import { FilterOption } from "@/types/definitions";
+import { FilterOption } from "@/types/defitions";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
@@ -14,7 +14,7 @@ export default function FilterOptionCheckbox({
     const [filterOption, setFilterOption] = useRecoilState(filterOptionAtomFamily(option.id));
 
     const handleChange = () => {
-      setFilterOption((prev) => ({ ...prev, checked: !prev.checked }));
+      setFilterOption((prev: FilterOption) => ({ ...prev, checked: !prev.checked }));
     };
   
     return (

@@ -14,7 +14,7 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import OneFilter from './OneFilter'
-import { AthleteAfterSignup, Filter, FilterOption } from '@/types/definitions'
+import { AthleteAfterSignup, Filter, FilterOption } from '@/types/defitions'
 import { useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { filterOptionAtomFamily, activeFiltersSelector, allFilterKeysAtom, matchingAthletesAtomFamily, selectedAthleteAtom, totalResultsAtom, pageNumberAtom, isPendingAtomFamily } from '@/lib/state'
 import toKebab from '@/utils/toKebab'
