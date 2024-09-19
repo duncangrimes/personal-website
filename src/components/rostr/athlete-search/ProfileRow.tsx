@@ -35,6 +35,34 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
         }
     }, [selectedAthlete]);
 
+    const onButtonClick = async () => {
+        if (rostr){
+            startTransition(() => {
+                if (onRostr){
+                    const removeAthleteFromRostr = async () => {
+                        await removeRecruitFromRostr(athlete.id, rostr.id);
+                        const updatedRostr = await getRostrWithAthleteIds(rostr.id);
+                        setRostr(updatedRostr);
+                    }
+                    removeAthleteFromRostr();
+                    toast.success('Athlete removed from Rostr');
+                }
+                else{
+                    const addAthleteToRostr = async () => {
+                        await addAthleteToAdminRecruitRostr(athlete.id, rostr.id);
+                        const updatedRostr = await getRostrWithAthleteIds(rostr.id);
+                        setRostr(updatedRostr);
+                    }
+                    addAthleteToRostr();
+                    toast.success('Athlete added to Rostr');
+                }
+            })
+        }
+        else {
+            toast.error('Please select a Rostr');
+        }
+    }
+
 
 
     useEffect(() => {
@@ -52,10 +80,20 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
             className={`flex flex-row justify-between text-black items-start p-4 border-b border-black ${isSelected ? 'bg-green-100' : 'bg-gray-200'} cursor-pointer`} 
             onClick={() => setSelectedAthlete(athlete)}
         >
-            <div className="flex flex-row">
-                <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full mr-4 w-20 h-20 object-cover" />
+            <div className="flex sm:flex-row flex-col">
+                <div className="flex flex-row justify-between">
+                     <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full mr-4 w-20 h-20 object-cover" />
+
+
+                    {rostr && <Button onClick={onButtonClick}
+                            disabled={isPending}
+                            className={`rounded-lg text-white font-medium min-w-28 text-base sm:hidden flex items-center
+                                        ${onRostr ? 'bg-red-500' : 'bg-rostr-purple hover:bg-rostr-purple-hover'} px-3 h-10`}>
+                                {isPending ? <LoadingDots color="#808080"/> : onRostr ? 'Remove From Rostr' : 'Add to Rostr'}
+                            </Button>}
+                </div>
                 <div className='flex flex-col'>
-                    <div className="flex flex-row items-end space-x-4 ">
+                    <div className="flex sm:flex-row sm:items-end sm:space-x-4 flex-col">
                         <h3 className="text-2xl font-bold">{athlete.firstName + " " + athlete.lastName}</h3>
 
                         {athlete.linkedIn ? <Link href={athlete.linkedIn}>
@@ -105,37 +143,12 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
                     </div>  
                 </div>
             </div>
-            {rostr && <Button onClick={() => {
-                if (rostr){
-                    startTransition(() => {
-                        if (onRostr){
-                            const removeAthleteFromRostr = async () => {
-                                await removeRecruitFromRostr(athlete.id, rostr.id);
-                                const updatedRostr = await getRostrWithAthleteIds(rostr.id);
-                                setRostr(updatedRostr);
-                            }
-                            removeAthleteFromRostr();
-                            toast.success('Athlete removed from Rostr');
-                        }
-                        else{
-                            const addAthleteToRostr = async () => {
-                                await addAthleteToAdminRecruitRostr(athlete.id, rostr.id);
-                                const updatedRostr = await getRostrWithAthleteIds(rostr.id);
-                                setRostr(updatedRostr);
-                            }
-                            addAthleteToRostr();
-                            toast.success('Athlete added to Rostr');
-                        }
-                    })
-                }
-                else {
-                    toast.error('Please select a Rostr');
-                }
-            }}
-            disabled={isPending}
-            className={`rounded-lg text-white font-medium min-w-28 text-base ${onRostr ? 'bg-red-500' : 'bg-rostr-purple'} px-3 py-2`}>
-                {isPending ? <LoadingDots color="#808080"/> : onRostr ? 'Remove From Rostr' : 'Add to Rostr'}
-            </Button>}
+            {rostr && <Button onClick={onButtonClick}
+                            disabled={isPending}
+                            className={`rounded-lg text-white font-medium min-w-28 text-base hidden sm:flex
+                                        ${onRostr ? 'bg-red-500' : 'bg-rostr-purple hover:bg-rostr-purple-hover'} px-3 py-2`}>
+                                {isPending ? <LoadingDots color="#808080"/> : onRostr ? 'Remove From Rostr' : 'Add to Rostr'}
+                            </Button>}
         </div>
     )
 }

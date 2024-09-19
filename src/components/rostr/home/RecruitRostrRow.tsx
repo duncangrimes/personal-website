@@ -104,7 +104,7 @@ export default function RecruitRostrRow({rostr}: {rostr: AdminRecruitRostr}) {
                 </div>
             </div>
             <div className='flex flex-col items-end'>
-                <Link href={`/rostr/demo/athlete-search/${rostr.id}`}className={`w-40 bg-purple-300 rounded-xl px-3 py-2`}>
+                <Link href={`/rostr/demo/athlete-search/?rostrId=${rostr.id}`}className={`w-40 bg-purple-300 rounded-xl px-3 py-2`}>
                     Manage Recruits
                 </Link>
             </div>

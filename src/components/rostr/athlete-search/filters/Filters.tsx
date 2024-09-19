@@ -83,15 +83,9 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
 
         <div className="border-b border-black bg-gray-800 pb-4 items-center">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-4 sm:px-6 lg:px-8">
-            <ActiveRostrCombobox rostrId={defaultRostrId} />
-
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="inline-block text-sm font-medium text-gray-300 hover:text-gray-900 sm:hidden"
-            >
-              Filters
-            </button>
+            <div className='flex flex-row align-middle'>
+              <ActiveRostrCombobox rostrId={defaultRostrId} />
+            </div>
 
             <div className="hidden sm:block">
               <div className="flow-root">

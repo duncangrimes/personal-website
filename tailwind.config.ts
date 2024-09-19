@@ -9,8 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        rostr: {
+          green: {
+            light: {
+              reg: '#effcf2',
+              hover: '#e6fbec',
+              active: '#ccf6d8',
+            },
+            normal: {
+              reg: '#5be180',
+              hover: '#4ac96b',
+              active: '#49b466',
+            },
+            dark: {
+              reg: '#44a960',
+              hover: '#37874d',
+              active: '#29653a'
+            },
+            darker: '#204f2d'
+          },
+          bg: {
+            dark: '#160E20',
+          },
+          purple: '#B184F9',
+          'purple-hover': '#9051F6'
+        },
       },
       keyframes: {
         blink: {

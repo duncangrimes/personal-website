@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 function Content() {
     const searchParams = useSearchParams();
     const rostrId = searchParams.get('rostrId');
+    console.log('rostrId', rostrId);
 
     return (
         <div>
@@ -21,7 +22,7 @@ function Content() {
     )
 }
 
-export default function AthleteSearchPage() { 
+export default function AthleteSearchPage() {
 
     return (
         <div className="flex flex-col min-h-full bg-black pt-16 pb-20 w-full">

@@ -12,7 +12,7 @@ export default function ActiveFilters({activeFilters}: {activeFilters: FilterOpt
         }));
       }, []);
 
-    return (<div className="bg-gray-900">
+    return (<div className="bg-gray-900 sm:block hidden">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:flex sm:items-center sm:px-6 lg:px-8">
           <h3 className="text-sm font-medium text-gray-200">
             Filters

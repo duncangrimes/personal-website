@@ -1,7 +1,7 @@
 'use client'
 
 import getAllAdminRecruitRostrs from '@/actions/admin/recruit-rostrs/getAllAdminRecruitRostrs'
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Label, Field } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { use, useEffect, useState } from 'react'
@@ -58,6 +58,8 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
         })
 
   return (
+    <div className='flex flex-row'>
+      <span className={'font-medium text-gray-200 self-center pr-2'}>Rostr: </span>
       <Combobox value={selectedRostr} onChange={(value) => setSelectedRostr(value)} onClose={() => setQuery('')}>
         <div className="relative z-20">
           <ComboboxInput onClick={() => setQuery('')} placeholder="Select a Rostr"
@@ -77,7 +79,7 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
           anchor="bottom"
           transition
           className={clsx(
-            'w-[var(--input-width)] z-20 rounded-xl border border-white/5 bg-white/80 p-1 [--anchor-gap:var(--spacing-1)] empty:invisible',
+            'w-[var(--input-width)] z-20 rounded-xl border border-white/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible',
             'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
           )}
         >
@@ -97,5 +99,6 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
           ))}
         </ComboboxOptions>
       </Combobox>
+    </div>
   )
 }
