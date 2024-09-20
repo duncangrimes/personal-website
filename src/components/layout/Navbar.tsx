@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import RostrLogo from '@/components/rostr/logos/RostrLogo';
 
 export default function Navbar() {
 
@@ -32,6 +33,9 @@ export default function Navbar() {
                   <Link href="/" className={` hover:text-white ${inRostr ? 'flex' : 'hidden'}
                             rounded-md px-3 h-10 items-center hover:bg-[#28183A]`}>
                     Athletes
+                  </Link>
+                  <Link href="/" className="group px-3 py-2 rounded-md hover:bg-[#28183A] items-center h-10">
+                    <RostrLogo type="full" className="w-16 h-auto text-gray-300 group-hover:text-white"/>
                   </Link>
                 </div>
             </div>

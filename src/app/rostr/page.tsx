@@ -1,6 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
-import background from '~/public/images/rostr-home/rostr-home-bg.png';
+import background from '~/public/images/rostr-home/landing-bg.png';
 import duncan from '~/public/images/rostr-home/duncan.jpeg';
 import will from '~/public/images/rostr-home/will.jpeg';
 import graphic from '~/public/images/rostr-home/section-seperator.svg';
@@ -61,16 +61,16 @@ const HomePage: NextPage = () => {
               {subtitle}
             </p>
             <div className="flex justify-center mt-4 space-x-2">
-              <button className="bg-rostr-green-normal-reg text-black px-4 py-2 rounded-lg transition duration-300 ease-in-out hover:bg-green-700">
-                <Link href="/athlete">
-                I am an athlete
+              <button className="bg-rostr-green-normal-reg font-bold text-green-900 text-subtitle border-2 border-purple-600 hover:border-purple-400 hover:text-purple-400 px-4 sm:px-16 py-2 rounded-lg transition duration-300 ease-in-out hover:bg-green-700">
+                <Link href="/rostr/demo">
+                Demo Rostr recruitment software
                 </Link>
               </button>
-              <button className="bg-rostr-purple text-black px-4 py-2 rounded-lg transition duration-300 ease-in-out hover:bg-purple-700">
+              {/* <button className="bg-rostr-purple text-black px-4 py-2 rounded-lg transition duration-300 ease-in-out hover:bg-purple-700">
               <Link href="/employer">
                 I am an employer
                 </Link>
-              </button>
+              </button> */}
             </div>
 
           </div>
