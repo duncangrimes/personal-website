@@ -1,7 +1,7 @@
 'use server'
 
 // import { auth } from '@/lib/auth';
-import { Location } from '@/types/defitions';
+import { Location } from '@/types/definitions';
 import { ServerError } from '@/types/exceptions';
 
 

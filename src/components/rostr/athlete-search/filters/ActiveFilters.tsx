@@ -1,7 +1,7 @@
 'use client'
 
 import { filterOptionAtomFamily } from "@/lib/state";
-import { FilterOption } from "@/types/defitions";
+import { FilterOption } from "@/types/definitions";
 import { useRecoilCallback, useRecoilState } from "recoil";
 
 export default function ActiveFilters({activeFilters}: {activeFilters: FilterOption[]}) {

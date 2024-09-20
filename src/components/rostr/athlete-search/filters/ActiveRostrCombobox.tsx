@@ -1,14 +1,14 @@
 'use client'
 
-import getAllAdminRecruitRostrs from '@/actions/admin/recruit-rostrs/getAllAdminRecruitRostrs'
+import getAllAdminRecruitRostrs from '@/actions/recruit-rostrs/getAllAdminRecruitRostrs'
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Label, Field } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { use, useEffect, useState } from 'react'
-import { AdminRecruitRostr } from '@/types/defitions'
+import { AdminRecruitRostr } from '@/types/definitions'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { adminRostrWithRecruitsAtom } from '@/lib/state'
-import getRostrWithAthleteIds from '@/actions/admin/recruit-rostrs/getRostrWithAthleteIds'
+import getRostrWithAthleteIds from '@/actions/recruit-rostrs/getRostrWithAthleteIds'
 import { match } from 'assert'
 
 export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {

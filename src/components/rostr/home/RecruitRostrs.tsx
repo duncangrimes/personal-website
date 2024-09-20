@@ -1,7 +1,7 @@
 'use client'
 
-import countAdminRecruitRostrs from "@/actions/admin/recruit-rostrs/countAdminRecruitRostrs"
-import getAdminRecruitRostrs from "@/actions/admin/recruit-rostrs/getAdminRecruitRostrs"
+import countAdminRecruitRostrs from "@/actions/recruit-rostrs/countAdminRecruitRostrs"
+import getAdminRecruitRostrs from "@/actions/recruit-rostrs/getAdminRecruitRostrs"
 import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom } from "@/lib/state"
 import { useEffect } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"

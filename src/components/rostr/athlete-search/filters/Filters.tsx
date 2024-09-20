@@ -14,15 +14,15 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import OneFilter from './OneFilter'
-import { AthleteAfterSignup, Filter, FilterOption } from '@/types/defitions'
+import { AthleteAfterSignup, Filter, FilterOption } from '@/types/definitions'
 import { useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { filterOptionAtomFamily, activeFiltersSelector, allFilterKeysAtom, matchingAthletesAtomFamily, selectedAthleteAtom, totalResultsAtom, pageNumberAtom, isPendingAtomFamily } from '@/lib/state'
 import toKebab from '@/utils/toKebab'
 import ActiveFilters from './ActiveFilters'
-import searchAthletes from '@/actions/admin/athlete-search/searchAthletes'
-import countFilteredAthleteResults from '@/actions/admin/athlete-search/countFilteredAthleteResults'
+import searchAthletes from '@/actions/athlete-search/searchAthletes'
+import countFilteredAthleteResults from '@/actions/athlete-search/countFilteredAthleteResults'
 import ActiveRostrCombobox from './ActiveRostrCombobox'
-import getFilters from '@/actions/admin/athlete-search/getFilters'
+import getFilters from '@/actions/athlete-search/getFilters'
 
 export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
 

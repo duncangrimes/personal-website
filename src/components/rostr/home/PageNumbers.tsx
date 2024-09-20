@@ -1,6 +1,6 @@
 'use client'
 
-import getAdminRecruitRostrs from "@/actions/admin/recruit-rostrs/getAdminRecruitRostrs";
+import getAdminRecruitRostrs from "@/actions/recruit-rostrs/getAdminRecruitRostrs";
 import { fetchedAdminRecruitRostrsAtom, pageNumberAtom, totalResultsAtom } from "@/lib/state"
 import { useRecoilState, useRecoilValue } from "recoil"
 

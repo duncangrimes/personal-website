@@ -2,7 +2,7 @@
 
 // import authenticateAdmin from '@/actions/auth/authenticateAdmin';
 import prisma from '@/lib/prisma';
-import { AthleteAfterSignup, FilterOption } from '@/types/defitions';
+import { AthleteAfterSignup, FilterOption } from '@/types/definitions';
 import { ServerError } from '@/types/exceptions';
 import locationToString from '@/utils/locationToString';
 

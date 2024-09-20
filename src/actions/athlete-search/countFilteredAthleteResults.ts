@@ -1,5 +1,5 @@
 'use server'
-import { FilterOption } from "@/types/defitions";
+import { FilterOption } from "@/types/definitions";
 import prisma from "@/lib/prisma";
 // import {auth} from "@/lib/auth";
 // import authenticateAdmin from "@/actions/auth/authenticateAdmin";

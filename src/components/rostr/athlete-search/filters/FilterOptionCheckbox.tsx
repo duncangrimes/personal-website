@@ -1,7 +1,7 @@
 'use client'
 
 import { filterOptionAtomFamily } from "@/lib/state";
-import { FilterOption } from "@/types/defitions";
+import { FilterOption } from "@/types/definitions";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 

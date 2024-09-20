@@ -1,7 +1,7 @@
 'use server'
 
 // import authenticateAdmin from "@/actions/auth/authenticateAdmin";
-import { AdminRecruitRostr } from "@/types/defitions";
+import { AdminRecruitRostr } from "@/types/definitions";
 import { ServerError } from "@/types/exceptions";
 import prisma from "@/lib/prisma";
 

@@ -1,8 +1,8 @@
 import { atom, selector } from 'recoil';
-import { Role, AthleteAfterSignup, FilterOption, AdminRecruitRostr, AdminRostrWithAthleteIds, Location } from '@/types/defitions';
+import { Role, AthleteAfterSignup, FilterOption, AdminRecruitRostr, AdminRostrWithAthleteIds, Location } from '@/types/definitions';
 import { atomFamily } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import { University } from '@/types/defitions';
+import { University } from '@/types/definitions';
 
 const { persistAtom } = recoilPersist()
 

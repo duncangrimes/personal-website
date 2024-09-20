@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pt_sans, open_sans, cooper_hewitt } from "@/lib/fonts";
 import "@/styles/globals.css";
 import AppProviders from "@/components/providers/AppProviders";
+import Navbar from "@/components/layout/Navbar";
 
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function RootLayout({
       </head>
       <body className={`${pt_sans.variable} ${open_sans.variable} ${cooper_hewitt.variable} font-body h-full`}>
         <AppProviders>
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
           {/* <Footer /> */}
           </AppProviders>

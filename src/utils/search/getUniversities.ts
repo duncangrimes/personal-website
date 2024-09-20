@@ -1,7 +1,7 @@
 'use server'
 
 // import { auth } from '@/lib/auth';
-import { University } from '@/types/defitions';
+import { University } from '@/types/definitions';
 import { ServerError } from '@/types/exceptions';
 
 export default async function getUniversities(query: string): Promise<University[]> {

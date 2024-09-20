@@ -1,6 +1,6 @@
 'use client'
 
-import searchAthletes from "@/actions/admin/athlete-search/searchAthletes";
+import searchAthletes from "@/actions/athlete-search/searchAthletes";
 import { activeFiltersSelector, matchingAthletesAtomFamily, pageNumberAtom, selectedAthleteAtom, totalResultsAtom } from "@/lib/state"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 

@@ -28,7 +28,9 @@
     "react-hot-toast": "^2.4.1",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
-    "resend": "^3.3.0"
+    "resend": "^3.3.0",
+    "@react-email/components": "0.0.19"
+
   },
   "devDependencies": {
     "@types/node": "^20",

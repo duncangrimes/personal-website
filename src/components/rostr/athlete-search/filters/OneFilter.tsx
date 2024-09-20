@@ -7,7 +7,7 @@ import {
   PopoverPanel,
 } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Filter, FilterOption } from '@/types/defitions';
+import { Filter, FilterOption } from '@/types/definitions';
 import { filterOptionAtomFamily } from '@/lib/state';
 import FilterOptionCheckbox from './FilterOptionCheckbox';
 

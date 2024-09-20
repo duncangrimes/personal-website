@@ -1,8 +1,8 @@
-import countAdminRecruitRostrs from "@/actions/admin/recruit-rostrs/countAdminRecruitRostrs";
-import deleteAdminRecruitRostr from "@/actions/admin/recruit-rostrs/deleteAdminRecruitRostr";
-import getAdminRecruitRostrs from "@/actions/admin/recruit-rostrs/getAdminRecruitRostrs";
+import countAdminRecruitRostrs from "@/actions/recruit-rostrs/countAdminRecruitRostrs";
+import deleteAdminRecruitRostr from "@/actions/recruit-rostrs/deleteAdminRecruitRostr";
+import getAdminRecruitRostrs from "@/actions/recruit-rostrs/getAdminRecruitRostrs";
 import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom } from "@/lib/state";
-import { AdminRecruitRostr } from "@/types/defitions";
+import { AdminRecruitRostr } from "@/types/definitions";
 import { Button, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useSetRecoilState } from "recoil";
