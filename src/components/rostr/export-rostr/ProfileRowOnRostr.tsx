@@ -1,6 +1,6 @@
-import addAthleteToAdminRecruitRostr from "@/actions/admin/athlete-search/addAthleteToAdminRecruitRostr"
-import getRostrWithAthleteIds from "@/actions/admin/recruit-rostrs/getRostrWithAthleteIds"
-import removeRecruitFromRostr from "@/actions/admin/athlete-search/removeRecruitFromRostr"
+import addAthleteToAdminRecruitRostr from '@/actions/athlete-search/addAthleteToAdminRecruitRostr'
+import getRostrWithAthleteIds from "@/actions/recruit-rostrs/getRostrWithAthleteIds"
+import removeRecruitFromRostr from "@/actions/athlete-search/removeRecruitFromRostr"
 import { adminRostrWithRecruitsAtom, matchingAthletesAtomFamily, selectedAthleteAtom } from "@/lib/state"
 import { AthleteAfterSignup } from "@/types/definitions"
 import { Button, Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
@@ -10,7 +10,7 @@ import Link from "next/link"
 import { useEffect, useState, useTransition } from "react"
 import toast from "react-hot-toast"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import getAthletesOnRostr from "@/actions/admin/recruit-rostrs/getAthletesOnRostr"
+import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr"
 import LoadingDots from "@/components/ui/LoadingDots"
 
 export default function ProfileRowOnRostr({ athlete, rostrId }: {athlete: AthleteAfterSignup, rostrId: string }) {

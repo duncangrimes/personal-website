@@ -1,20 +1,26 @@
 import countAdminRecruitRostrs from "@/actions/recruit-rostrs/countAdminRecruitRostrs";
 import deleteAdminRecruitRostr from "@/actions/recruit-rostrs/deleteAdminRecruitRostr";
 import getAdminRecruitRostrs from "@/actions/recruit-rostrs/getAdminRecruitRostrs";
-import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom } from "@/lib/state";
+import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom, athleteCountAtomFamily } from "@/lib/state";
 import { AdminRecruitRostr } from "@/types/definitions";
 import { Button, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useSetRecoilState } from "recoil";
-import { Fragment } from 'react'
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { Fragment, useEffect, useState } from 'react'
 import Link from "next/link";
+import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 
 export default function RecruitRostrRow({rostr}: {rostr: AdminRecruitRostr}) {
+    const router = useRouter();
     const setRostrToEdit = useSetRecoilState(adminRecruitRostrAtom);
     const setTotalRostrCount = useSetRecoilState(totalResultsAtom);
     const setViewingRostrs = useSetRecoilState(fetchedAdminRecruitRostrsAtom);
     const setModalOpen = useSetRecoilState(dialogOpenAtomFamily('recruit-rostr-dialog'));
+    const [athleteCount, setAthleteCount] = useRecoilState(athleteCountAtomFamily(rostr.id));
+
     const deleteAndRefresh = async (id: string) => {
         await deleteAdminRecruitRostr(id);
         const rostrs = await getAdminRecruitRostrs();
@@ -23,34 +29,55 @@ export default function RecruitRostrRow({rostr}: {rostr: AdminRecruitRostr}) {
         setTotalRostrCount(rostrCount);
     }
 
+    useEffect(() => {
+        async function getAthleteCount () {
+            const athletes = await getAthletesOnRostr(rostr.id);
+            const count = athletes.length;
+            setAthleteCount(count);
+        }
+        getAthleteCount();
+    }, [])
+
     return (
-        <div className='flex flex-row justify-between border-b-2 bg-gray-300 text-black border-gray-500 p-4'>
-            <div className='flex flex-col item-start max-w-[70%]'>
+        <div className='flex flex-row justify-between  bg-gray-300 text-black  p-4'>
+            <div className='flex flex-col item-start justify-start max-w-[70%]'>
                 <div className='flex flex-row items-end space-x-4'>
                     <h2 className='text-2xl font-bold mb-2'>{rostr.position}</h2>
                 </div>
-                {rostr.companyName && <div className="flex-inline flex items-end">
+                <div className="flex-inline flex items-end">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-5 mr-1 mb-1`}>
+                      <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+                    </svg>
+
+                     
+                    <p className={`text-base font-extralight`}>{athleteCount} {(athleteCount === 1) ? 'recruit' : 'recruits'}</p>
+
+
+
+
+                </div>
+                {<div className="flex-inline flex items-end">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 mr-1 mb-1">
                      <path fillRule="evenodd" d="M1 2.75A.75.75 0 0 1 1.75 2h10.5a.75.75 0 0 1 0 1.5H12v13.75a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-2.5a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75v2.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5H2v-13h-.25A.75.75 0 0 1 1 2.75ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM8 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM8.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM14.25 6a.75.75 0 0 0-.75.75V17a1 1 0 0 0 1 1h3.75a.75.75 0 0 0 0-1.5H18v-9h.25a.75.75 0 0 0 0-1.5h-4Zm.5 3.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm.5 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z" clipRule="evenodd" />
                     </svg>
-                    <p className='text-base font-extralight'> {rostr.companyName}</p>
+                    <p className='text-base font-extralight'> {rostr.companyName ? rostr.companyName : '---'}</p>
                 </div>}
-                {rostr.location && <div className="flex-inline flex items-end">
+                {<div className="flex-inline flex items-end">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-4 mb-1 mr-2">
                         <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
                     </svg>
-                    <p className='text-base font-extralight'> {rostr.location}</p>
+                    <p className='text-base font-extralight'> {rostr.location ? rostr.location : '---'}</p>
                 </div>}
-                {rostr.notes && <Disclosure as="div" className="">
+                {<Disclosure as="div" className="">
                     <DisclosureButton className="group  inline-flex w-full text-end items-end justify-start text-black ">
                         <ChevronDownIcon className="size-5 mr-1 mb-[1px] fill-black/60 -rotate-90 group-data-[hover]:fill-black/50 group-data-[open]:rotate-0" />
                         <p className="text-base font-extralight text-black group-data-[hover]:text-black/80">
                         Notes
                         </p>
                     </DisclosureButton>
-                    <DisclosurePanel className="mt-2 ml-6 text-sm/5 text-purple-950">
+                    {rostr.notes ? <DisclosurePanel className="mt-2 ml-6 text-sm/5 text-purple-950">
                     {rostr.notes}
-                    </DisclosurePanel>
+                    </DisclosurePanel>: null}
                 </Disclosure>}
                 <div className='mt-2 flex flex-row items-center space-x-4'>
                     <Button
@@ -103,10 +130,22 @@ export default function RecruitRostrRow({rostr}: {rostr: AdminRecruitRostr}) {
                     </Menu>
                 </div>
             </div>
-            <div className='flex flex-col items-end'>
-                <Link href={`/rostr/demo/athlete-search/?rostrId=${rostr.id}`}className={`w-40 bg-purple-300 rounded-xl px-3 py-2`}>
-                    Manage Recruits
+            <div className='flex flex-col text-center justify-center gap-4'>
+                <Link href={`/rostr/athlete-search/?rostrId=${rostr.id}`}className={`w-40 text-white bg-rostr-purple hover:bg-rostr-purple-hover text-center rounded-xl px-3 py-2`}>
+                    Add Candidates
                 </Link>
+                {(athleteCount > 0 ) ? <Button onClick={() => router.push(`rostr/${rostr.id}`)}className={`w-40 text-center rounded-xl px-3 py-2
+                    text-white bg-rostr-green-normal-reg hover:bg-rostr-green-normal-hover
+                }`}
+                    >
+                    Export Rostr
+                </Button> :
+                <div onClick={() => toast.error('Add recruits first to export a Rostr')} className={`w-40 text-whte text-center rounded-xl px-3 py-2
+                    text-white bg-gray-400 cursor-not-allowed`}
+                        >
+                        Export Rostr
+                    </div>
+                }
             </div>
         </div>
     )

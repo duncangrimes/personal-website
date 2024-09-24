@@ -11,21 +11,19 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 
 import { useEffect, useState, useTransition } from 'react'
 import searchLocationOptions from '@/utils/search/searchLocationOptions'
-import createAdminRecruitRostr from '@/actions/admin/recruit-rostrs/createAdminRecruitRostr'
+import createAdminRecruitRostr from '@/actions/recruit-rostrs/createAdminRecruitRostr'
 import toast from 'react-hot-toast'
 import LoadingDots from '@/components/ui/LoadingDots'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom } from '@/lib/state'
-import updateAdminRecruitRostr from '@/actions/admin/recruit-rostrs/updateAdminRecruitRostr'
-import getAdminRecruitRostrs from '@/actions/admin/recruit-rostrs/getAdminRecruitRostrs'
-import countAdminRecruitRostrs from '@/actions/admin/recruit-rostrs/countAdminRecruitRostrs'
+import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom, isPendingAtomFamily } from '@/lib/state'
+import updateAdminRecruitRostr from '@/actions/recruit-rostrs/updateAdminRecruitRostr'
+import getAdminRecruitRostrs from '@/actions/recruit-rostrs/getAdminRecruitRostrs'
+import countAdminRecruitRostrs from '@/actions/recruit-rostrs/countAdminRecruitRostrs'
 import locationToString from '@/utils/locationToString'
 
-export default function AdminRostrModal () {
+export default function EditRostrModal () {
     const rostr = useRecoilValue(adminRecruitRostrAtom);
-    const setCurrentViewingRostrs = useSetRecoilState(fetchedAdminRecruitRostrsAtom);
-
-    const setTotalRostrCount = useSetRecoilState(totalResultsAtom);
+    const setIsPending = useSetRecoilState(isPendingAtomFamily('editing-rostr'))
     const [dialogOpen, setDialagOpen] = useRecoilState(dialogOpenAtomFamily('recruit-rostr-dialog'));
     const [locations, setLocations] = useState<string[]>([]);
     const [query, setQuery] = useState('');
@@ -108,10 +106,7 @@ export default function AdminRostrModal () {
                 else{
                     result = await createAdminRecruitRostr(form);
                 }
-                const rostrs = await getAdminRecruitRostrs();
-                setCurrentViewingRostrs(rostrs);
-                const rostrCount = await countAdminRecruitRostrs();
-                setTotalRostrCount(rostrCount);
+                setIsPending(true);
                 close();
             } catch (error) {
             toast.error('Failed to update recruit rostr');

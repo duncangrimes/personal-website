@@ -145,3 +145,8 @@ export const isPendingAtomFamily = atomFamily<boolean, string>({
   key: 'isPending',
   default: false
 });
+
+export const athleteCountAtomFamily = atomFamily<number, string>({
+  key: 'athleteCount',
+  default: 0
+});

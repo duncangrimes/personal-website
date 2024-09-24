@@ -1,10 +1,10 @@
 'use client'
 
-import { matchingAthletesAtomFamily, selectedAthleteAtom, totalResultsAtom } from "@/lib/state";
+import { matchingAthletesAtomFamily, selectedAthleteAtom } from "@/lib/state";
 import { useRecoilState, useRecoilValue } from "recoil";
-import ProfileRowOnRostr from "@/components/admin/recruit-rostrs/manage/ProfileRowOnRostr";
+import ProfileRowOnRostr from "@/components/rostr/export-rostr/ProfileRowOnRostr";
 import { useEffect } from "react";
-import getAthletesOnRostr from "@/actions/admin/recruit-rostrs/getAthletesOnRostr";
+import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr";
 
 export default function ViewRecruits({rostrId}: {rostrId: string}) {
     const selectedAthlete = useRecoilValue(selectedAthleteAtom);

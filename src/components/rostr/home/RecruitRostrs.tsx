@@ -35,8 +35,10 @@ export default function RecruitRostrs() {
         </button>
             <div className={`flex flex-row ${(rostrs.length > 0) && 'border-white border-2'} bg-gray-600`}>
                 <div className={`flex h-full flex-col w-full`}>
-                    {rostrs.map(rostr => (
+                    {rostrs.map((rostr, idx) => (
+                        <div className={`w-full ${(idx < rostrs.length - 1 ) && 'border-b-2'} border-gray-500`}>
                         <RecruitRostrRow rostr={rostr} key={rostr.id} />
+                        </div>
                     ))}
                 </div>
             </div>
