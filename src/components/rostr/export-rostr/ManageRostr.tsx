@@ -16,6 +16,8 @@ import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr";
 import Link from "next/link";
 import sendRecruits from "@/actions/export-rostr/sendRecruits";
 import getRostrWithAthleteIds from "@/actions/recruit-rostrs/getRostrWithAthleteIds";
+import { notFound } from 'next/navigation';
+
 
 interface OrderedAthlete {
     athlete: AthleteAfterSignup,
@@ -31,22 +33,24 @@ export default function ManageRostr({rostrId, adminEmail}: {rostrId: string, adm
     const setModalOpen = useSetRecoilState(dialogOpenAtomFamily('recruit-rostr-dialog'));
     const athletes = useRecoilValue(matchingAthletesAtomFamily(`rostr-${rostrId}`));
 
-    useEffect(() => {
-        setSelectedAthlete(null);
-        async function getRostr() {
+
+    async function getRostr() {
+        try {
             const fetchedRostr = await getAdminRecruitRostr(rostrId)
             setRostr(fetchedRostr);
+            setRostrLoaded(false);
+        } catch (error) {
+            router.push('/404');
         }
+    }
+
+    useEffect(() => {
+        setSelectedAthlete(null);
         getRostr();
     },[]);
 
     useEffect(() => {
         setSelectedAthlete(null);
-        async function getRostr() {
-            const fetchedRostr = await getAdminRecruitRostr(rostrId);            
-            setRostr(fetchedRostr);
-            setRostrLoaded(false);
-        }
         getRostr();
     },[reloadRostr]);
 
