@@ -1,7 +1,7 @@
 import addAthleteToAdminRecruitRostr from "@/actions/athlete-search/addAthleteToAdminRecruitRostr"
 import getRostrWithAthleteIds from "@/actions/recruit-rostrs/getRostrWithAthleteIds"
 import removeRecruitFromRostr from "@/actions/athlete-search/removeRecruitFromRostr"
-import { adminRostrWithRecruitsAtom, athleteResumeAtomFamily, dialogOpenAtomFamily, selectedAthleteAtom } from "@/lib/state"
+import { adminRostrWithRecruitsAtom, athleteNameAtomFamily, athleteResumeAtomFamily, dialogOpenAtomFamily, selectedAthleteAtom } from "@/lib/state"
 import { AthleteAfterSignup, AdminRecruit } from "@/types/definitions"
 import { Button, Disclosure, DisclosureButton, DisclosurePanel, } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/20/solid"
@@ -17,6 +17,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
     const [rostr, setRostr] = useRecoilState(adminRostrWithRecruitsAtom);
     const [onRostr, setOnRostr] = useState(false);
     const setAthleteResume = useSetRecoilState(athleteResumeAtomFamily('resume-dialog'));
+    const setAthleteName = useSetRecoilState(athleteNameAtomFamily('athlete-resume-name'));
     const setResumeDialogOpen = useSetRecoilState(dialogOpenAtomFamily('resume-dialog'));
     const [isSelected, setIsSelected] = useState(false);
     const [isPending, startTransition] = useTransition();
@@ -66,6 +67,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
         if (athlete.resume){
             setAthleteResume(athlete.resume);
             setResumeDialogOpen(true);
+            setAthleteName(`${athlete.firstName} ${athlete.lastName}`);
         }
     }
 
@@ -99,7 +101,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
                             </Button>}
                 </div>
                 <div className='flex flex-col'>
-                    <div className="flex sm:flex-row sm:items-end items-start sm:space-x-4 flex-col">
+                    <div className="flex sm:flex-row items-start sm:items-end sm:space-x-4 flex-col">
                         <h3 className="text-2xl font-bold">{athlete.firstName + " " + athlete.lastName}</h3>
 
                         {athlete.linkedIn ? <Link href={athlete.linkedIn}>

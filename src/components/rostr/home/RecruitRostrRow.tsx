@@ -140,7 +140,7 @@ export default function RecruitRostrRow({rostr}: {rostr: AdminRecruitRostr}) {
                     >
                     Export Rostr
                 </Button> :
-                <div onClick={() => toast.error('Add recruits first to export a Rostr')} className={`w-40 text-whte text-center rounded-xl px-3 py-2
+                <div onClick={() => toast.error('Add candidates first to export a Rostr')} className={`w-40 text-whte text-center rounded-xl px-3 py-2
                     text-white bg-gray-400 cursor-not-allowed`}
                         >
                         Export Rostr

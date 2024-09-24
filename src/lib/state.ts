@@ -155,3 +155,8 @@ export const athleteResumeAtomFamily = atomFamily<string | null, string>({
   key: 'athleteResume',
   default: null
 });
+
+export const athleteNameAtomFamily = atomFamily<string | null, string>({
+  key: 'athleteResume',
+  default: null
+});
