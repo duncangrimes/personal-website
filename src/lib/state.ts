@@ -150,3 +150,8 @@ export const athleteCountAtomFamily = atomFamily<number, string>({
   key: 'athleteCount',
   default: 0
 });
+
+export const athleteResumeAtomFamily = atomFamily<string | null, string>({
+  key: 'athleteResume',
+  default: null
+});

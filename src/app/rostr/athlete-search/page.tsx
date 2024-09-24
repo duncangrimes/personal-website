@@ -5,6 +5,7 @@ import Filters from '@/components/rostr/athlete-search/filters/Filters'
 import MatchingProfiles from '@/components/rostr/athlete-search/MatchingProfiles';
 import PageNumbers from '@/components/rostr/athlete-search/PageNumbers';
 import { useSearchParams } from 'next/navigation';
+import ResumeModal from '@/components/rostr/athlete-search/AthleteResumeModal';
 
 function Content() {
     const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ function Content() {
         <div>
         <Filters defaultRostrId={rostrId ? rostrId : undefined} />
             <div className='px-8'>
+                <ResumeModal />
                 <MatchingProfiles />
                 <PageNumbers />
             </div>

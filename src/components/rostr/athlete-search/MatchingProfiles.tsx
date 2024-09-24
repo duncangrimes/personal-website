@@ -17,25 +17,15 @@ export default function MatchingProfiles() {
             <div>
             <div className="inline-flex justify-between w-full">
                 <h2 className="text-2xl text-gray-200 font-bold mb-8 pt-60">{totalResults} Results</h2>
-                {selectedAthlete?.resume && <h2 id={'resume-header'} className="text-2xl text-end text-gray-200 font-bold mb-8 pt-60">{`${selectedAthlete.firstName} ${selectedAthlete.lastName}`}</h2>}
             </div>
             {(totalResults < 1) ?
             null
             :
             <div className='flex flex-row relative '>
-                <div className={`flex overflow-y-auto flex-col ${selectedAthlete?.resume && 'md:w-1/2 h-[70vh] overflow-y-auto'} w-full`}>
+                <div className={`flex overflow-y-auto flex-col overflow-y-auto'} w-full`}>
                     {matchingAthletes.map(athlete => (
                         <ProfileRow athlete={athlete} key={athlete.id} />
                     ))}
-                </div>
-                <div className={`${selectedAthlete?.resume ? 'flex flex-col items-center md:w-1/2 h-full pl-8 ' : 'hidden'}`}>
-                    {selectedAthlete?.resume && (
-                        <>
-                            <div className='flex-1 w-full h-full'>
-                                <iframe src={selectedAthlete?.resume} className='w-full min-h-[70vh]' />
-                            </div>
-                        </>
-                    )}
                 </div>
             </div>}
             </div>}

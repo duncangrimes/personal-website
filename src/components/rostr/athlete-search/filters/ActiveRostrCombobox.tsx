@@ -64,7 +64,7 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
         <div className="relative z-20">
           <ComboboxInput onClick={() => setQuery('')} placeholder="Select a Rostr"
             className={clsx(
-              'w-80 rounded-lg border-none bg-white/20 py-1.5 pr-8 pl-3 text-sm/6 text-white',
+              'w-60 sm:w-80 rounded-lg border-none bg-white/20 py-1.5 pr-8 pl-3 text-sm/6 text-white',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
             )}
             displayValue={(rostr: AdminRecruitRostr) => rostr?.position || ''}
