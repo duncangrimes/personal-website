@@ -1,48 +1,71 @@
 'use client'
 
-import { matchingAthletesAtomFamily, selectedAthleteAtom } from "@/lib/state";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { adminRecruitRostrAtom, adminRostrWithRecruitsAtom, isPendingAtomFamily, matchingAthletesAtomFamily, selectedAthleteAtom } from "@/lib/state";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ProfileRowOnRostr from "@/components/rostr/export-rostr/ProfileRowOnRostr";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr";
+import ProfileRow from "../athlete-search/ProfileRow";
+import getRostrWithAthleteIds from "@/actions/recruit-rostrs/getRostrWithAthleteIds";
 
 export default function ViewRecruits({rostrId}: {rostrId: string}) {
-    const selectedAthlete = useRecoilValue(selectedAthleteAtom);
     const [athletes, setAthletes] = useRecoilState(matchingAthletesAtomFamily(`rostr-${rostrId}`));
+    const rostr = useRecoilValue(adminRecruitRostrAtom);
+    const setRostrWithAthletes = useSetRecoilState(adminRostrWithRecruitsAtom);
+
+    const [reloadRostr, setReloadRostr] = useRecoilState(isPendingAtomFamily('export-rostr'));
+    const [loadingRecruits, setLoadingRecruits] = useRecoilState(isPendingAtomFamily('loading-recruits'));
+
+
+    async function getRostr() {
+        setLoadingRecruits(true);
+        const fetchedAthletes = await getAthletesOnRostr(rostrId);
+        if (rostr){
+            setAthletes([]);
+            const athleteIds = fetchedAthletes.map(recruit => ({ athlete: { id: recruit.id } }));
+            setRostrWithAthletes({...rostr, recruits: athleteIds});
+            setAthletes(fetchedAthletes);
+            setLoadingRecruits(false);
+        }
+    }
 
     useEffect(() => {
-        setAthletes([]);
-        async function getRostr() {
-            const fetchedAthletes = await getAthletesOnRostr(rostrId);
-            setAthletes(fetchedAthletes);
-        }
+        console.log(athletes);
+    }, [loadingRecruits]);
+
+    useEffect(() => {
         getRostr();
+    },[rostr]);
+
+    useEffect(() => {
+        setLoadingRecruits(true);
     },[]);
+
+    useEffect(() => {
+        
+        if (reloadRostr){
+            getRostr();
+            setReloadRostr(false);
+        }
+    },[reloadRostr]);
 
     return (
         <div className='py-10'>
             <div className="inline-flex justify-between w-full">
-                <h2 className="text-2xl text-gray-200 font-bold mb-8">{athletes.length} Recruits</h2>
-                {selectedAthlete?.resume && <h2 id={'resume-header'} className="text-2xl text-end text-gray-200 font-bold mb-8">{`${selectedAthlete.firstName} ${selectedAthlete.lastName}`}</h2>}
+                    <h2 className="text-2xl text-gray-200 font-bold mb-8">
+                        {loadingRecruits ? <span>{`Loading Candidates...`}</span> :
+                        <span>{athletes.length} Candidates</span>}
+                    </h2>
             </div>
             {(athletes.length < 1) ?
             null
             :
-            <div className='flex flex-row relative bg-red-50'>
-                <div className={`flex overflow-y-auto flex-col ${selectedAthlete?.resume && 'md:w-1/2 md:h-[70vh] md:overflow-y-auto'} w-full`}>
+            <div className='flex flex-row relative'>
+                <div className={`flex flex-col w-full`}>
                     {athletes.map(athlete => (
-                        <ProfileRowOnRostr rostrId={rostrId} athlete={athlete} key={athlete.id} />
+                        <ProfileRow athlete={athlete} key={athlete.id} />
                     ))}
-                </div>
-                <div className={`${selectedAthlete?.resume ? 'md:flex flex-col items-center md:w-1/2 h-full ' : 'hidden'}`}>
-                    {selectedAthlete?.resume && (
-                        <>
-                            <div className='w-full h-full hidden md:flex'>
-                                <iframe src={selectedAthlete?.resume} className='w-full min-h-[70vh]' />
-                            </div>
-                        </>
-                    )}
-                </div>
+                </div> 
             </div>}
         </div>
     )

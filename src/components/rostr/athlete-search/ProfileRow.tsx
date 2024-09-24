@@ -1,7 +1,7 @@
 import addAthleteToAdminRecruitRostr from "@/actions/athlete-search/addAthleteToAdminRecruitRostr"
 import getRostrWithAthleteIds from "@/actions/recruit-rostrs/getRostrWithAthleteIds"
 import removeRecruitFromRostr from "@/actions/athlete-search/removeRecruitFromRostr"
-import { adminRostrWithRecruitsAtom, athleteNameAtomFamily, athleteResumeAtomFamily, dialogOpenAtomFamily, selectedAthleteAtom } from "@/lib/state"
+import { adminRostrWithRecruitsAtom, athleteNameAtomFamily, athleteResumeAtomFamily, dialogOpenAtomFamily, isPendingAtomFamily, selectedAthleteAtom } from "@/lib/state"
 import { AthleteAfterSignup, AdminRecruit } from "@/types/definitions"
 import { Button, Disclosure, DisclosureButton, DisclosurePanel, } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/20/solid"
@@ -21,6 +21,8 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
     const setResumeDialogOpen = useSetRecoilState(dialogOpenAtomFamily('resume-dialog'));
     const [isSelected, setIsSelected] = useState(false);
     const [isPending, startTransition] = useTransition();
+    
+    const setReloadRostr = useSetRecoilState(isPendingAtomFamily('export-rostr'));
 
     useEffect(() => {
         if (selectedAthlete && athlete.id === selectedAthlete.id) {
@@ -33,6 +35,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
         } else {
             setIsSelected(false);
         }
+        console.log(rostr)
     }, [selectedAthlete]);
 
     const onButtonClick = async () => {
@@ -45,6 +48,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
                         setRostr(updatedRostr);
                     }
                     removeAthleteFromRostr();
+                    setReloadRostr(true);
                     toast.success('Athlete removed from Rostr');
                 }
                 else{

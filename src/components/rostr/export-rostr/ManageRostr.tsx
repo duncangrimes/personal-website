@@ -15,6 +15,7 @@ import getAdminRecruitRostr from "@/actions/recruit-rostrs/getAdminRecruitRostr"
 import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr";
 import Link from "next/link";
 import sendRecruits from "@/actions/export-rostr/sendRecruits";
+import getRostrWithAthleteIds from "@/actions/recruit-rostrs/getRostrWithAthleteIds";
 
 interface OrderedAthlete {
     athlete: AthleteAfterSignup,
@@ -33,7 +34,7 @@ export default function ManageRostr({rostrId, adminEmail}: {rostrId: string, adm
     useEffect(() => {
         setSelectedAthlete(null);
         async function getRostr() {
-            const fetchedRostr = await getAdminRecruitRostr(rostrId);            
+            const fetchedRostr = await getAdminRecruitRostr(rostrId)
             setRostr(fetchedRostr);
         }
         getRostr();
@@ -116,7 +117,7 @@ export default function ManageRostr({rostrId, adminEmail}: {rostrId: string, adm
                      <path fillRule="evenodd" d="M1 2.75A.75.75 0 0 1 1.75 2h10.5a.75.75 0 0 1 0 1.5H12v13.75a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-2.5a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75v2.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5H2v-13h-.25A.75.75 0 0 1 1 2.75ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM8 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM8.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM14.25 6a.75.75 0 0 0-.75.75V17a1 1 0 0 0 1 1h3.75a.75.75 0 0 0 0-1.5H18v-9h.25a.75.75 0 0 0 0-1.5h-4Zm.5 3.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm.5 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z" clipRule="evenodd" />
                     </svg>
                     <p className='text-base font-extralight'> {rostr.companyName}</p>
-                </div>}
+                 </div>}
                 {rostr.location && <div className="flex-inline flex items-end">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-4 mb-1 mr-2">
                         <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
