@@ -24,20 +24,6 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
     
     const setReloadRostr = useSetRecoilState(isPendingAtomFamily('export-rostr'));
 
-    useEffect(() => {
-        if (selectedAthlete && athlete.id === selectedAthlete.id) {
-            setIsSelected(true);
-            const headingElement = document.getElementById(`resume-header`);
-            if (headingElement) {
-                headingElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-
-        } else {
-            setIsSelected(false);
-        }
-        console.log(rostr)
-    }, [selectedAthlete]);
-
     const onButtonClick = async () => {
         if (rostr){
             startTransition(() => {
@@ -74,8 +60,6 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
             setAthleteName(`${athlete.firstName} ${athlete.lastName}`);
         }
     }
-
-
 
     useEffect(() => {
         if (rostr && athlete) {

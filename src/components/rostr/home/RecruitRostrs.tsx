@@ -3,7 +3,7 @@
 import countAdminRecruitRostrs from "@/actions/recruit-rostrs/countAdminRecruitRostrs"
 import getAdminRecruitRostrs from "@/actions/recruit-rostrs/getAdminRecruitRostrs"
 import { fetchedAdminRecruitRostrsAtom, adminRecruitRostrAtom, dialogOpenAtomFamily, totalResultsAtom } from "@/lib/state"
-import { useEffect } from "react"
+import { useEffect, useTransition } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
 import RecruitRostrRow from "./RecruitRostrRow"
 
@@ -12,16 +12,21 @@ export default function RecruitRostrs() {
     const [totalRostrCount, setTotalRostrCount] = useRecoilState(totalResultsAtom);
     const setRostrToEdit = useSetRecoilState(adminRecruitRostrAtom);
     const setDialagOpen = useSetRecoilState(dialogOpenAtomFamily('recruit-rostr-dialog'));
+    const [isPending, startTransition] = useTransition();
+
+    const fetchRecruitRostrs = async () => {
+        const numRostrs = await countAdminRecruitRostrs();
+        const fetchedRostrs = await getAdminRecruitRostrs();
+        setRostrs(fetchedRostrs);
+        setTotalRostrCount(numRostrs);
+    }
 
     useEffect(() => {
-        const fetchRecruitRostrs = async () => {
-            const numRostrs = await countAdminRecruitRostrs();
-            const fetchedRostrs = await getAdminRecruitRostrs();
-            setRostrs(fetchedRostrs);
-            setTotalRostrCount(numRostrs);
-        }
-        fetchRecruitRostrs();
+        startTransition(() => {
+            fetchRecruitRostrs();
+        })
     }, [])
+    
     return (
         <div>
             <button className='text-gray-400 inline-flex items-center justify-start hover:text-white text-xl mb-8'
@@ -33,15 +38,21 @@ export default function RecruitRostrs() {
             </svg>
             <span className='ml-2'>Add new posting</span>
         </button>
+            {isPending ?
+                <h2 className="text-2xl text-gray-200 font-bold mb-8">
+                    Loading Rostrs...
+                </h2>
+                :
             <div className={`flex flex-row ${(rostrs.length > 0) && 'border-white border-2'} bg-gray-600`}>
                 <div className={`flex h-full flex-col w-full`}>
                     {rostrs.map((rostr, idx) => (
-                        <div className={`w-full ${(idx < rostrs.length - 1 ) && 'border-b-2'} border-gray-500`}>
-                        <RecruitRostrRow rostr={rostr} key={rostr.id} />
-                        </div>
+                        <li key={rostr.id} className={`w-full ${(idx < rostrs.length - 1 ) && 'border-b-2'} border-gray-500`}>
+                            <RecruitRostrRow rostr={rostr} key={rostr.id} />
+                        </li>
                     ))}
                 </div>
             </div>
+            }
         </div>
     )
 }
