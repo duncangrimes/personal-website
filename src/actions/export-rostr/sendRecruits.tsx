@@ -25,7 +25,7 @@ export default async function sendRecruits(props: SendRecruitsProps){
     
     const result = await sendEmail({
         subject: `Recruits for ${rostr.position}`,
-        from: 'recruiter@joinrostr.com',
+        from: 'Rostr Recruiter <rostr-recruiter@duncangrimes.com>',
         to: [email],
         text: 'Recruits List',
         react: react
