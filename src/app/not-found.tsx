@@ -1,19 +1,23 @@
-import Link from "next/link";
+import { Button } from '@/components/tailwindui/Button'
+import { Container } from '@/components/tailwindui/Container'
 
-export default function NotFoundPage() {
-    return (<>
-      <main className="grid min-h-full place-items-center bg-gradient-to-r from-rostr-bg-dark to-purple-800 px-6 py-24 sm:py-32 lg:px-8">
-          <div className="text-center">
-            <p className="font-subtitle text-rostr-purple">404</p>
-            <h1 className="mt-4 text-4xl font-title tracking-tight text-white">PAGE NOT FOUND</h1>
-            <p className="mt-6 text-base leading-7 text-gray-400">Sorry, we couldn’t find the page you’re looking for.</p>
-            <div className="mt-10 flex justify-center">
-            <Link href="/" className="text-sm font-semibold text-gray-300 hover:text-white
-                                rounded-md px-3 py-2 hover:bg-[#70429E]">
-              <span aria-hidden="true">&larr;</span> Back to home
-            </Link>
-          </div>
-          </div>
-        </main>
-      </>)
-  }
+export default function NotFound() {
+  return (
+    <Container className="flex h-full items-center pt-16 sm:pt-32">
+      <div className="flex flex-col items-center">
+        <p className="text-base font-semibold text-zinc-500">
+          404
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl text-zinc-100">
+          Page not found
+        </h1>
+        <p className="mt-4 text-base text-zinc-400">
+          Sorry, we couldn’t find the page you’re looking for.
+        </p>
+        <Button href="/" variant="secondary" className="mt-4">
+          Go back home
+        </Button>
+      </div>
+    </Container>
+  )
+}

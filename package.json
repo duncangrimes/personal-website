@@ -12,15 +12,16 @@
     "prisma:studio": "dotenv -e .env.local -- npx prisma studio",
     "prisma:migrate": "dotenv -e .env.local -- npx prisma migrate dev",
     "script:seed-athletes": "dotenv -e .env.local node ./scripts/seed-athletes.mjs"
-
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
     "@heroicons/react": "^2.1.3",
     "@prisma/client": "^5.19.1",
+    "@react-email/components": "0.0.19",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "next": "14.2.8",
+    "next-themes": "^0.3.0",
     "prisma": "^5.19.1",
     "react": "^18",
     "react-dom": "^18",
@@ -28,9 +29,7 @@
     "react-hot-toast": "^2.4.1",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
-    "resend": "^3.3.0",
-    "@react-email/components": "0.0.19"
-
+    "resend": "^3.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",

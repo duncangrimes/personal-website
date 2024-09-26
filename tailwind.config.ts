@@ -48,7 +48,7 @@ const config: Config = {
       fontFamily: {
         body: ['var(--font-pt-sans)'],
         subtitle: ['var(--font-open-sans)'],
-        title: ['var(--font-cooper-hewitt)'],
+        rostrTitle: ['var(--font-cooper-hewitt)'],
       },
     },
   },
