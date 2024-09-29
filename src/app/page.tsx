@@ -7,9 +7,7 @@ import { Card } from '@/components/tailwindui/Card'
 import { Container } from '@/components/tailwindui/Container'
 import {
   GitHubIcon,
-  InstagramIcon,
   LinkedInIcon,
-  XIcon,
 } from '@/components/tailwindui/SocialIcons'
 import logoAirbnb from '~/public/images/logos/airbnb.svg'
 import logoFacebook from '~/public/images/logos/facebook.svg'
@@ -99,38 +97,9 @@ function SocialLink({
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <Link className="group -m-1 p-1" {...props}>
+    <Link className="group -m-1 p-1" {...props} target="_blank" rel="noopener noreferrer">
       <Icon className="h-6 w-6 transition  fill-zinc-400 group-hover:fill-zinc-300" />
     </Link>
-  )
-}
-
-function Newsletter() {
-  return (
-    <form
-      action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 border-zinc-700/40"
-    >
-      <h2 className="flex text-sm font-semibold  text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
-      </h2>
-      <p className="mt-2 text-sm  text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
-      </p>
-      <div className="mt-6 flex">
-        <input
-          type="email"
-          placeholder="Email address"
-          aria-label="Email address"
-          required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5  focus:outline-none focus:ring-4 sm:text-sm border-zinc-700 bg-zinc-700/[0.15] text-zinc-200 placeholder:text-zinc-500 focus:border-teal-400 focus:ring-teal-400/10"
-        />
-        <Button type="submit" className="ml-4 flex-none">
-          Join
-        </Button>
-      </div>
-    </form>
   )
 }
 
@@ -248,19 +217,13 @@ export default async function Home() {
             I’m Duncan.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
             <SocialLink
-              href="#"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />
-            <SocialLink
-              href="#"
+              href="https://github.com/duncangrimes"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="#"
+              href="https://www.linkedin.com/in/duncan-grimes-a84641230/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />

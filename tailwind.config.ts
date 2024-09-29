@@ -46,8 +46,8 @@ const config: Config = {
         blink: 'blink 1.4s infinite both',
       },
       fontFamily: {
-        body: ['var(--font-pt-sans)'],
-        subtitle: ['var(--font-open-sans)'],
+        rostrBody: ['var(--font-pt-sans)'],
+        rostrSubtitle: ['var(--font-open-sans)'],
         rostrTitle: ['var(--font-cooper-hewitt)'],
       },
     },

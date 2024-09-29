@@ -12,7 +12,7 @@ export default async function AdminPage (){
     return (<>
           <Container className="mt-9">
 
-        <h1 className="text-white text-center text-6xl font-title mb-8">Rostr</h1>
+        <h1 className="text-white text-center text-6xl font-rostrTitle mb-8">ROSTR</h1>
             <AdminRostrModal />
             <RecruitRostrs />
             <PageNumbers />
