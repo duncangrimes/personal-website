@@ -138,7 +138,9 @@ function NavItem({
   href: string
   children: React.ReactNode
 }) {
-  let isActive = usePathname() === href
+  const pathname = usePathname();
+
+  let isActive = pathname.includes('rostr') ? (href.includes('rostr')) : pathname === href
 
   return (
     <li>
