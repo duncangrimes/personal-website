@@ -2,22 +2,12 @@
 
 import { use, useEffect, useState } from 'react'
 import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Popover,
-  PopoverButton,
   PopoverGroup,
-  PopoverPanel,
 } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import OneFilter from './OneFilter'
 import { AthleteAfterSignup, Filter, FilterOption } from '@/types/definitions'
 import { useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { filterOptionAtomFamily, activeFiltersSelector, allFilterKeysAtom, matchingAthletesAtomFamily, selectedAthleteAtom, totalResultsAtom, pageNumberAtom, isPendingAtomFamily } from '@/lib/state'
-import toKebab from '@/utils/toKebab'
 import ActiveFilters from './ActiveFilters'
 import searchAthletes from '@/actions/athlete-search/searchAthletes'
 import countFilteredAthleteResults from '@/actions/athlete-search/countFilteredAthleteResults'
@@ -73,7 +63,7 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
 
   const [open, setOpen] = useState(false)
   return (
-    <div className="fixed w-full z-10">
+    <div className="w-full px-0">
 
       {/* Filters */}
       <section aria-labelledby="filter-heading">
@@ -87,7 +77,7 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
               <ActiveRostrCombobox rostrId={defaultRostrId} />
             </div>
 
-            <div className="hidden sm:block">
+            <div className="hidden sm:flex w-full justify-end">
               <div className="flow-root">
                 <PopoverGroup className="-mx-4 flex items-center divide-x divide-gray-200">
                   {filters.map((filter) => (
