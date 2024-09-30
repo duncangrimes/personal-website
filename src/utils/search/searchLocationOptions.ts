@@ -10,7 +10,7 @@ export default async function searchLocationOptions(query: string): Promise<Loca
     // if (!session?.user.id) {
     //     throw new ServerError('Unauthorized');
     // }
-    const blobUrl = 'https://bslawdjccw8rwuod.public.blob.vercel-storage.com/us-cities-ZM3jJrAR4HksgqlcYhQ8gE4RlBvC7V.json';
+    const blobUrl = 'https://isieuvdfysya85mr.public.blob.vercel-storage.com/lists/us-cities-s6nbuZ5oSl7bqG7wgJ3FVP7OyKmgHD.json';
     const response = await fetch(blobUrl);
     
     if (!response.ok) {
