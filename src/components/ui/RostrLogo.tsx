@@ -9,7 +9,7 @@ export default function RostrLogo({ type="full", width, className = ""}: RLogoPr
     if (type === "full"){
         width = !width ? "586.37" : width;
         return (
-                    <svg
+        <svg
             id="full-logo"
             data-testid="full-logo"
             xmlns="http://www.w3.org/2000/svg"

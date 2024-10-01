@@ -29,7 +29,7 @@ export default function RecruitRostrs() {
     
     return (
         <div>
-            <button className='text-gray-400 inline-flex items-center justify-start hover:text-white text-xl mb-8'
+            <button className='text-rostr-green-normal-reg inline-flex items-center justify-start hover:text-rostr-green-normal-hover text-xl mb-8'
              onClick={() => {
             setRostrToEdit(null);
             setDialagOpen(true)}}>
