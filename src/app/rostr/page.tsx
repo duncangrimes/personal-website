@@ -12,19 +12,18 @@ export default async function AdminPage (){
     // await authenticateAdmin();
     
     const description = <>
-                    I co-founded Rostr in the summer of 2024 with my long-time friend and business partner, Will Schweitzer.
-                    {/* Will was a linebacker for the University of Notre Dame, but his career was cut short due to injury. */}
-                    <br/><br/>
+        I co-founded Rostr in the summer of 2024 with my long-time friend and business partner, Will Schweitzer.
+        {/* Will was a linebacker for the University of Notre Dame, but his career was cut short due to injury. */}
+        <br/><br/>
 
-                    The mission behind Rostr was to create a platform to empower the <span className="text-rostr-purple font-bold">66% </span>
-                    of collegiate athletes who graduate college without a job and won't find one for at least a year.
-                    
-                    <br/><br/>
+        The mission behind Rostr was to create a platform to empower the <span className="text-rostr-purple font-bold">66% </span>
+        of collegiate athletes who graduate without a job and won&#39;t find one for at least a year.
+        
+        <br/><br/>
 
-                    We were accepted into the <Link href={'https://ideacenter.nd.edu/se/opportunities/race-to-revenue/'}
-                        className="text-rostr-purple underline hover:text-rostr-purple-hover">Race to Revenue</Link> startup accelerator program at the University of Notre Dame
-
-                    </>
+        We were accepted into the <Link href={'https://ideacenter.nd.edu/se/opportunities/race-to-revenue/'}
+            className="text-rostr-purple underline hover:text-rostr-purple-hover">Race to Revenue</Link> startup accelerator program at the University of Notre Dame
+    </>
 
     return (<>
           <Container className="mt-16 lg:mt-32">
