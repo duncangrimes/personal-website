@@ -237,9 +237,9 @@ export default async function Home() {
               <Article key={article.slug} article={article} />
             ))} */}
           </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
+          {/* <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Resume />
-          </div>
+          </div> */}
         </div>
       </Container>
     </>

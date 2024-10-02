@@ -13,7 +13,7 @@ export default async function AdminPage (){
     
     const description = <>
                     I co-founded Rostr in the summer of 2024 with my long-time friend and business partner, Will Schweitzer.
-                    Will was a linebacker for the University of Notre Dame, but his career was cut short due to injury.
+                    {/* Will was a linebacker for the University of Notre Dame, but his career was cut short due to injury. */}
                     <br/><br/>
 
                     The mission behind Rostr was to create a platform to empower the <span className="text-rostr-purple font-bold">66% </span>
