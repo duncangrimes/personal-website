@@ -27,13 +27,13 @@ export const articleList: ArticleInfo[] = [
     date: '2024-03-01',
     href: '/rostr',
   },
-  {
-    title: 'ML text-classification model',
-    description: '',
-    date: '2022-07-01',
-    href: '/articles/vanderbilt-fusion-project',
-  },
-]
+  // {
+  //   title: 'ML text-classification model',
+  //   description: '',
+  //   date: '2024-07-01',
+  //   href: '/articles/vanderbilt-fusion-project',
+  // },
+].sort((a, z) => +new Date(z.date) - +new Date(a.date))
 
 
 
