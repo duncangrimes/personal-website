@@ -35,12 +35,17 @@ export function Card<T extends React.ElementType = 'div'>({
 
 Card.Link = function CardLink({
   children,
+  newTab = false,
   ...props
-}: React.ComponentPropsWithoutRef<typeof Link>) {
+}: React.ComponentPropsWithoutRef<typeof Link> & { newTab?: boolean }) {
   return (
     <>
       <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl bg-zinc-800/50" />
-      <Link {...props}>
+      <Link
+        {...props}
+        target={newTab ? '_blank' : undefined}
+        rel={newTab ? 'noopener noreferrer' : undefined}
+      >
         <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">{children}</span>
       </Link>
@@ -51,16 +56,24 @@ Card.Link = function CardLink({
 Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
   as,
   href,
+  newTab = false,
   children,
 }: Omit<React.ComponentPropsWithoutRef<T>, 'as' | 'href'> & {
   as?: T
   href?: string
+  newTab?: boolean
 }) {
   let Component = as ?? 'h2'
 
   return (
     <Component className="text-base font-semibold tracking-tight text-zinc-100">
-      {href ? <Card.Link href={href}>{children}</Card.Link> : children}
+      {href ? (
+        <Card.Link href={href} newTab={newTab}>
+          {children}
+        </Card.Link>
+      ) : (
+        children
+      )}
     </Component>
   )
 }

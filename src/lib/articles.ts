@@ -11,7 +11,9 @@ export interface ArticleInfo {
 export const articleList: ArticleInfo[] = [
   {
     title: 'Vanderbilt Fusion Project',
-    description: '',
+    description: `
+    I worked as a Control Systems Engineer with the VBF, designing the digital controls for a soccer ball-sized nuclear fusion reactor.
+    Through this project I expanded my knowledge on systems design, negotiated with part distributors, and collobarated with a talented team of undergraduate engineers.`,
     date: '2022-09-01',
     href: 'https://www.vanderbiltfusion.org/',
   },

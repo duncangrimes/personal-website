@@ -141,7 +141,9 @@ export default function AdminRostrModal () {
                             <form className='flex flex-col' onSubmit={handleSubmit} id='create-admin-recruit-rostr'>
                                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                                     <Field>
-                                        <Label htmlFor="position" className="text-sm/6 font-medium text-white">Position</Label>
+                                        <Label htmlFor="position" className="text-sm/6 font-medium text-white">Position
+                                        <span className='text-red-500 ml-1'>*</span>
+                                        </Label>
                                         <Input
                                         id="position"
                                         name="position"

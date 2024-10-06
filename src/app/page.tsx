@@ -78,7 +78,7 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function Article({ article }: { article: ArticleInfo }) {
   return (
     <Card as="article">
-      <Card.Title href={article.href}>
+      <Card.Title href={article.href} newTab={article.href.includes('http')}>
         {article.title}
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
