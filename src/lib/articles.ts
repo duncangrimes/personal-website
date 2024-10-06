@@ -13,19 +13,22 @@ export const articleList: ArticleInfo[] = [
     title: 'Vanderbilt Fusion Project',
     description: `
     I worked as a Control Systems Engineer with the VBF, designing the digital controls for a soccer ball-sized nuclear fusion reactor.
-    Through this project I expanded my knowledge on systems design, negotiated with part distributors, and collobarated with a talented team of undergraduate engineers.`,
+    Through this project I expanded my knowledge of systems design, negotiated with part distributors, and collobarated with a talented team of undergraduate engineers.`,
     date: '2022-09-01',
     href: 'https://www.vanderbiltfusion.org/',
   },
   {
     title: 'ratAItoille',
-    description: '',
+    description: `I created an experimental random recipe generator with some of my friends and classmates.
+    We used a dataset of 5,000 recipes to train a series of ML models to generate a random dish, determine the ingredients for that recipe,
+    and then generate an image of the finished product.`,
     date: '2024-02-01',
     href: 'https://medium.com/@carmiles/rat-ai-touille-an-experimental-recipe-generator-fd7bc85389d9',
   },
   {
     title: 'Rostr',
-    description: '',
+    description: `I co-founded Rostr in the summer of 2024, with the mission to connect student-athletes with employers.
+    Please enjoy this demo, where you can play the role of a Rostr recruiter.`,
     date: '2024-03-01',
     href: '/rostr',
   },

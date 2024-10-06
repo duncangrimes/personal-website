@@ -61,7 +61,7 @@ export default async function AdminPage (){
                         <ul className="list-decimal ml-6">
                             <li><span className="text-rostr-purple">Create </span> a new Rostr&mdash;an open role requested by an interested employer</li>
                             <li><span className="text-rostr-purple">Filter </span> candidates and add them to your Rostr</li>
-                            <li><span className="text-rostr-purple">Send </span> your Rostr to the employer's email inbox</li>
+                            <li><span className="text-rostr-purple">Send </span> your Rostr to the employer&#39;s email inbox</li>
                         </ul>
                     </div>
                 
