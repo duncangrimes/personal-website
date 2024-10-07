@@ -8,7 +8,6 @@ import LoadingDots from "@/components/ui/LoadingDots";
 export default function MatchingProfiles() {
     const matchingAthletes = useRecoilValue(matchingAthletesAtomFamily('athlete-search'));
     const totalResults = useRecoilValue(totalResultsAtom);
-    const selectedAthlete = useRecoilValue(selectedAthleteAtom);
     const isPending = useRecoilValue(isPendingAtomFamily('athlete-search-results'));
     return (
         <div className=''>

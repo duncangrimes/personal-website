@@ -61,7 +61,6 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
     setIsPending(false);
 }, [activeFilters]);
 
-  const [open, setOpen] = useState(false)
   return (
     <div className="w-full px-0">
 
@@ -77,7 +76,7 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
               <ActiveRostrCombobox rostrId={defaultRostrId} />
             </div>
 
-            <div className="hidden sm:flex w-full justify-end">
+            <div className="hidden lg:flex w-full justify-end">
               <div className="flow-root">
                 <PopoverGroup className="-mx-4 flex items-center divide-x divide-gray-200">
                   {filters.map((filter) => (
