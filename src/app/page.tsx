@@ -214,7 +214,8 @@ export default async function Home() {
              Entrepreneur, <br/> Full stack developer, <br/> Machine learning engineer.
           </h1>
           <p className="mt-6 text-base text-zinc-400">
-            I’m Duncan.
+            I’m Duncan Grimes, a senior at Vanderbilt University graduating in spring 2025, with 
+            majors in Applied Mathematics and Computer Science and a minor in Business.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
