@@ -1,5 +1,4 @@
 import Image, { type ImageProps } from 'next/image'
-import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Button } from '@/components/tailwindui/Button'
@@ -15,6 +14,7 @@ import logoPlanetaria from '~/public/images/logos/planetaria.svg'
 import logoStarbucks from '~/public/images/logos/starbucks.svg'
 import { type ArticleInfo, articleList } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import Link from 'next/link'
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -131,7 +131,7 @@ function Role({ role }: { role: Role }) {
           {role.company}
         </dd>
         <dt className="sr-only">Role</dt>
-        <dd className="text-xs  text-zinc-400">
+        <dd className="text-xs text-zinc-400">
           {role.title}
         </dd>
         <dt className="sr-only">Date</dt>
@@ -217,7 +217,9 @@ export default async function Home() {
             I&#39;m Duncan Grimes, a senior at Vanderbilt University graduating in Spring 2025.
             I will be graduating with majors in Applied Mathematics and Computer Science, as well as a minor in Business.
             <br/><br/>
-            Please enjoy reading about some projects I&#39;ve worked on and try a demo of the Rostr platform I built in summer 2024.
+            Please enjoy reading about some projects I&#39;ve worked on and&nbsp;
+            <Link href={'/rostr'} className='underline text-zinc-300 hover:text-zinc-500'>try a demo</Link>
+            &nbsp;of the Rostr platform I built in Summer 2024.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
