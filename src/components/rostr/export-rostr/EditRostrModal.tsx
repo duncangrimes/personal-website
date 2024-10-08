@@ -136,11 +136,15 @@ export default function EditRostrModal () {
                             <form className='flex flex-col' onSubmit={handleSubmit} id='create-admin-recruit-rostr'>
                                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                                     <Field>
-                                        <Label htmlFor="position" className="text-sm/6 font-medium text-white">Position</Label>
+                                        <Label htmlFor="position" className="text-sm/6 font-medium text-white">
+                                            Position
+                                            <span className='text-red-400 ml-1'>*</span>
+                                        </Label>
                                         <Input
                                         id="position"
                                         name="position"
                                         value={formData.position}
+                                        placeholder='Ex: Sales Associate'
                                         required
                                         onChange={handleChange}
                                         className={clsx(
@@ -211,18 +215,23 @@ export default function EditRostrModal () {
                                         value={formData.notes}
                                         onChange={handleChange}
                                         className={clsx(
-                                        'mt-3 block w-full min-h-10 rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white',
+                                        'mt-3 block w-full md:min-h-10 rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white',
                                         'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
                                         )}
-                                        rows={5} // Adjust the number of rows as needed
+                                        rows={2}
                                     />
                                 </Field>
-                                <Button
-                                className="inline-flex mt-4 self-center items-center gap-2 min-h-8 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                                type={'submit'}
-                                >
-                                {isPending ? <LoadingDots color="#808080" /> : 'Submit'}
-                                </Button>
+                                <div className='sm:grid-cols-3 sm:grid flex flex-col items-center justify-center mt-4 '>
+                                    <div/>
+                                    <Button
+                                    className="self-center items-center gap-2 min-h-8 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                                    type={'submit'}
+                                    disabled={isPending}
+                                    >
+                                    {isPending ? <LoadingDots color="#808080" /> : 'Submit'}
+                                    </Button>
+                                    <p className='text-xs self-end text-red-400 justify-self-end'>* Mandatory field</p>
+                                </div>
                             </form>
     
                         </DialogPanel>

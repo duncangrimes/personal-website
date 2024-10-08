@@ -97,7 +97,7 @@ export default function ManageRostr({rostrId, adminEmail}: {rostrId: string, adm
     }
 
     return (<div className="flex flex-col">
-            <div className='flex flex-row justify-start text-md items-end space-x-16'>
+            <div className='flex flex-row md:justify-start justify-between text-md items-end md:space-x-16'>
                 <Link href="/rostr" className="inline-flex items-center justify-start text-slate-300 hover:text-slate-400 mb-8">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
@@ -111,7 +111,7 @@ export default function ManageRostr({rostrId, adminEmail}: {rostrId: string, adm
                     <span className='ml-2'>Add More Candidates</span>
                 </Link>
             </div>
-        {rostr ? <div className='flex flex-row justify-between border-y-2 text-gray-200 border-gray-500 p-4'>
+        {rostr ? <div className='flex flex-col md:flex-row md:justify-between justify-center border-y-2 text-gray-200 border-gray-500 p-4'>
             <div className='flex flex-col item-start max-w-[70%]'>
                 <div className='flex flex-row items-end space-x-4'>
                     <h2 className='text-4xl font-title font-bold mb-2'>{rostr.position}</h2>
@@ -189,7 +189,7 @@ export default function ManageRostr({rostrId, adminEmail}: {rostrId: string, adm
                     </Menu>
                 </div>
             </div>
-            {(athletes.length > 0) && <div>
+            {(athletes.length > 0) && <div className="mt-8 md:mt-0">
                 <form className='flex flex-col w-80 pr-8' onSubmit={handleSubmit}>
                     <Field>
                         <Label htmlFor="email" className="text-sm/6 font-medium text-white">Send to:</Label>

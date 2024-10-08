@@ -19,7 +19,7 @@ function Content() {
     return (
         <Container className='w-full h-full flex flex-col'>
             <ResumeModal />
-            <div className='flex flex-row mb-4 justify-between text-md md:justify-start gap-16'>
+            <div className='flex flex-row mb-8 justify-between text-md md:justify-start gap-16'>
                 <Link href='/rostr' className='text-slate-300 hover:text-slate-400 inline-flex gap-x-2 items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />

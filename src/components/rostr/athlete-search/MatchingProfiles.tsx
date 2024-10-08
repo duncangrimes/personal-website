@@ -12,7 +12,10 @@ export default function MatchingProfiles() {
     return (
         <div className=''>
             {isPending ? 
-            <LoadingDots /> :
+            <h2 className="text-2xl text-gray-200 font-bold mb-8">
+                Loading Rostrs...
+            </h2>
+             :
             <div>
             <div className="inline-flex justify-between w-full">
                 <h2 className="text-2xl text-gray-200 font-bold mb-8">{totalResults} Results</h2>
@@ -20,7 +23,7 @@ export default function MatchingProfiles() {
             {(totalResults < 1) ?
             null
             :
-                <div className={`flex-1 max-h-[60vh] overflow-y-scroll flex-col w-full`}>
+                <div className={`flex-1 flex-col w-full`}>
                     {matchingAthletes.map(athlete => (
                         <ProfileRow athlete={athlete} key={athlete.id} />
                     ))}

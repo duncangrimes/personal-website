@@ -25,6 +25,10 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
   const setIsPending = useSetRecoilState(isPendingAtomFamily('athlete-search-results'));
   const activeFilters = useRecoilValue(activeFiltersSelector);
 
+  useEffect(() => {
+    setIsPending(true);
+  },[]);
+
   // Initialize all filters
   const initializeFilters = useRecoilCallback(({ set }) => async () => {
     setTotalResults(0);
@@ -42,23 +46,24 @@ export default function Filters({defaultRostrId}: {defaultRostrId?: string}) {
   }, []);
 
   useEffect(() => {
+    // setIsPending(true);
     initializeFilters();
+    // setIsPending(false);
   }, []);
   
   // Fetch athletes when filters change
   useEffect(() => {
     const fetchAthletes = async () => {
-        
+        setIsPending(true);
         const totalMatches = await countFilteredAthleteResults(activeFilters);
         const athletes: AthleteAfterSignup[] = await searchAthletes(activeFilters);
         setTotalResults(totalMatches);
         setSelectedAthlete(null);
         setMatchingAthletes(athletes);
         setPageNumber(1);
+        setIsPending(false);
     };
-    setIsPending(true);
     fetchAthletes();
-    setIsPending(false);
 }, [activeFilters]);
 
   return (
