@@ -36,10 +36,10 @@ function Content() {
             </div>
             <Filters defaultRostrId={rostrId ? rostrId : undefined} />
             <div className='pt-10'>
-                
                 <MatchingProfiles />
+                <div className='pt-20'></div>
+                <PageNumbers />
             </div>
-            <PageNumbers />
         </Container>
     )
 }

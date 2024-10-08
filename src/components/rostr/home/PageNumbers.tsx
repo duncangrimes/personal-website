@@ -29,7 +29,7 @@ export default function PageNumbers() {
         setPageNumber(previousPage);
     }
 
-    return ((totalResults > 0) && <div className="mt-4 mx-auto flex flex-row items-end justify-center pt-40 space-x-4">
+    return ((totalResults > 0) && <div className="mt-4 mx-auto flex flex-row items-end justify-center pt-20 space-x-4">
         <div className="hidden sm:block">
         <p className="text-sm text-gray-400">
           Showing <span className="font-medium">{firstRostrNumber}</span> to <span className="font-medium">{lastRostrNumber}</span> of{' '}
