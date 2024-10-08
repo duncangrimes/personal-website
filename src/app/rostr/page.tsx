@@ -19,14 +19,14 @@ export default async function AdminPage (){
   
     We observed that <span className="text-rostr-purple">66% </span> of student-athletes across the US
     graduated college without a job and wouldn&#39;t find one for at least a year. We saw this as a largely untapped market by recruiters,
-    as many collegiate athletes possess great communication skills, strong work ethic, and they thrive in team-oriented settings.
-    The mission behind Rostr was to <span className="text-rostr-purple"> connect student-athletes with employers</span>, specifically looking at roles in sales.
+    as many collegiate athletes possess great communication skills, a strong work ethic, and they thrive in team-oriented settings.
+    The mission behind Rostr was to <span className="text-rostr-purple"> connect student-athletes with employers</span>, specifically focusing on roles in sales.
   
     <br/><br/>
   
     I took on the role of <span className="text-rostr-purple">CTO and lead engineer</span>, and Rostr was accepted into the <Link href={'https://ideacenter.nd.edu/se/opportunities/race-to-revenue/'}
       className="text-rostr-purple underline hover:text-rostr-purple-hover">Race to Revenue</Link> accelerator program at the University of Notre Dame.
-    Through this 12 week program, I supervised a team of 4 interns&mdash;2 designers and 2 developers. We built an application that enables student-athletes to create profiles and upload their resumes,
+    Throughought this 12 week program, I supervised a team of four interns&mdash;two designers and two developers. We built an application that enables student-athletes to create profiles and upload their resumes,
     then the Rostr team could filter these candidates and send matches to employers for interviews.
     <br/><br/>
     When I went back to Vanderbilt in the fall of 2024, Will and I decided to pursue other interests and move on from Rostr. Since then, I have

@@ -123,7 +123,7 @@ function MobileNavigation(
           <ul className="-my-2 divide-y divide-zinc-100 text-base divide-zinc-100/5 text-zinc-300">
             <MobileNavItem href="/">Home</MobileNavItem>
             <MobileNavItem href="/resume">Resume</MobileNavItem>
-            <MobileNavItem href="/rostr">Full Stack Demo</MobileNavItem>
+            <MobileNavItem href="/rostr">Demo</MobileNavItem>
           </ul>
         </nav>
       </PopoverPanel>
@@ -165,10 +165,10 @@ function NavItem({
 function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   return (
     <nav {...props}>
-      <ul className="flex w-80 rounded-full px-3 justify-center text-sm font-medium shadow-lg shadow-zinc-800/5 ring-1 backdrop-blur bg-zinc-800/90 text-zinc-200 ring-white/10">
+      <ul className="flex rounded-full px-3 justify-center text-sm font-medium shadow-lg shadow-zinc-800/5 ring-1 backdrop-blur bg-zinc-800/90 text-zinc-200 ring-white/10">
         <NavItem href="/">Home</NavItem>
         <NavItem href="/resume">Resume</NavItem>
-        <NavItem href="/rostr">Full Stack Demo</NavItem>
+        <NavItem href="/rostr">Demo</NavItem>
       </ul>
     </nav>
   )
