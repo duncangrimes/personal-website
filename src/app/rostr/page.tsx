@@ -56,9 +56,9 @@ export default async function AdminPage (){
                 </Disclosure>
 
                     <div className="mt-6 text-base text-zinc-200 leading-6">
-                    Please enjoy this demo, where you can play the role of a Rostr recruiter:
+                    <span className="font-medium">Please enjoy this demo, where you can play the role of a Rostr recruiter:</span>
                     <br/>
-                        <ul className="list-decimal ml-6">
+                        <ul className="list-decimal mt-2 text-zinc-400 ml-6">
                             <li><span className="text-rostr-purple">Create </span> a new Rostr&mdash;an open role requested by an interested employer</li>
                             <li><span className="text-rostr-purple">Filter </span> candidates and add them to your Rostr</li>
                             <li><span className="text-rostr-purple">Send </span> your Rostr to the employer&#39;s email inbox</li>
