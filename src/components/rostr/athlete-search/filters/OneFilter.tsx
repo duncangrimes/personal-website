@@ -36,7 +36,7 @@ export default function OneFilter({ section, activeFilters }: { section: Filter,
 
       <PopoverPanel
         transition
-        className="absolute  max-h-64 overflow-y-auto right-0 z-10 mt-2 origin-top-right rounded-md bg-white/80 p-4 shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+        className="absolute  max-h-64 overflow-y-auto right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
       >
         <form className="space-y-4">
           {section.options.map((option: FilterOption) => {

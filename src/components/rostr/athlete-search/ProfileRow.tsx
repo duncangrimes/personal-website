@@ -73,17 +73,17 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
     return (
         <div
             key={athlete.id}
-            className={`flex flex-row cursor-auto justify-between text-black items-start p-4 border-b border-black ${isSelected ? 'bg-green-100' : 'bg-gray-200'} cursor-pointer`} 
+            className={`flex w-full flex-row cursor-auto justify-between text-black items-start p-4 border-b border-black ${isSelected ? 'bg-green-100' : 'bg-gray-200'} cursor-pointer`} 
             onClick={() => setSelectedAthlete(athlete)}
         >
-            <div className="flex sm:flex-row flex-col">
-                <div className="flex flex-row justify-between">
-                     <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full mr-4 w-20 h-20 object-cover" />
+            <div className="flex sm:flex-row flex-col w-full">
+                <div className="flex flex-row mr-0 sm:mr-4 flex-shrink-0 ">
+                     <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full w-20 h-20 object-cover" />
 
 
                     {rostr && <Button onClick={onButtonClick}
                             disabled={isPending}
-                            className={`rounded-lg text-white h-10 items-center justify-center font-medium min-w-28 text-base sm:hidden flex
+                            className={`rounded-lg text-white h-10 ml-auto items-center whitespace-nowrap font-medium text-base sm:hidden flex
                                         ${onRostr ? 'bg-red-500 hover:bg-red-700' : 'bg-rostr-purple hover:bg-rostr-purple-hover'} px-3`}>
                                 {isPending ? <LoadingDots color="#808080"/> : onRostr ? 'Remove From Rostr' : 'Add to Rostr'}
                             </Button>}
@@ -110,14 +110,14 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
                             ) : null}
                             <p><span className="">Hometown:</span> {athlete.hometown}</p>
                             <Disclosure as="div" className="" defaultOpen={isSelected}>
-                                <DisclosureButton className="group inline-flex min-w-24 text-start items-end justify-start text-purple-950 ">
-                                    <ChevronDownIcon className="size-5 mb-[1px] fill-purple-950 -rotate-90 group-data-[hover]:fill-purple-950/50 group-data-[open]:mb-[2px] group-data-[open]:rotate-0" />
+                                <DisclosureButton className="group inline-flex min-w-24 text-start items-end justify-start ">
+                                    <ChevronDownIcon className="size-5 mb-[1px] text-slate-700 -rotate-90 group-data-[hover]:text-slate-950/50 group-data-[open]:mb-[2px] group-data-[open]:rotate-0" />
 
-                                    <p className="text-base font-extralight text-purple-950 group-data-[hover]:text-purple-950/50">
+                                    <p className="text-base font-extralight text-slate-700 group-data-[hover]:text-slate-950/50">
                                     Desired Locations
                                     </p>
                                 </DisclosureButton>
-                                <DisclosurePanel className="ml-4 text-sm/5 flex flex-col text-purple-950">
+                                <DisclosurePanel className="ml-4 text-sm/5 flex flex-col font-extralight text-slate-600">
                                 {athlete.desiredLocations.map(location => <span key={location}>{location}</span>)}
                                     </DisclosurePanel>
                             </Disclosure>
@@ -142,8 +142,8 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
             </div>
             {rostr && <Button onClick={onButtonClick}
                             disabled={isPending}
-                            className={`rounded-lg text-white h-10 items-center justify-center font-medium min-w-28 text-base hidden sm:flex
-                                        ${onRostr ? 'bg-red-500 hover:bg-red-700' : 'bg-rostr-purple hover:bg-rostr-purple-hover'} px-3 py-2`}>
+                            className={`rounded-lg text-white h-10 whitespace-nowrap items-center font-medium text-base hidden sm:flex
+                                        ${onRostr ? 'bg-red-500 hover:bg-red-700' : 'bg-rostr-purple hover:bg-rostr-purple-hover'} px-3`}>
                                 {isPending ? <LoadingDots color="#808080"/> : onRostr ? 'Remove From Rostr' : 'Add to Rostr'}
                             </Button>}
         </div>

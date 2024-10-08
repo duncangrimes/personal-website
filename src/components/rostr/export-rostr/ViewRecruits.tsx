@@ -2,7 +2,6 @@
 
 import { adminRecruitRostrAtom, adminRostrWithRecruitsAtom, isPendingAtomFamily, matchingAthletesAtomFamily, selectedAthleteAtom } from "@/lib/state";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import ProfileRowOnRostr from "@/components/rostr/export-rostr/ProfileRowOnRostr";
 import { use, useEffect } from "react";
 import getAthletesOnRostr from "@/actions/recruit-rostrs/getAthletesOnRostr";
 import ProfileRow from "../athlete-search/ProfileRow";

@@ -17,9 +17,9 @@ export default async function AdminPage (){
     I co-founded Rostr in the summer of 2024 with my friend and business partner, Will Schweitzer, a former linebacker for the University of Notre Dame.
     <br/><br/>
   
-    We had observed that <span className="text-rostr-purple">66% </span> of student-athletes across the US
+    We observed that <span className="text-rostr-purple">66% </span> of student-athletes across the US
     graduated college without a job and wouldn&#39;t find one for at least a year. We saw this as a largely untapped market by recruiters,
-    as collegiate athletes possess strong communication skills, work ethic, and they thrive in team-oriented settings.
+    as many collegiate athletes possess great communication skills, strong work ethic, and they thrive in team-oriented settings.
     The mission behind Rostr was to <span className="text-rostr-purple"> connect student-athletes with employers</span>, specifically looking at roles in sales.
   
     <br/><br/>
@@ -41,7 +41,7 @@ export default async function AdminPage (){
                 <div className="mx-auto w-full max-w-lg divide-y divide-white/5 rounded-xl bg-white/5">
         
             </div>
-            <Disclosure as="div" className="" defaultOpen={false}>
+            <Disclosure as="div" className="" defaultOpen={true}>
                 <DisclosureButton className="group flex pr-6 py-2 justify-start items-center">
                     <span className="font-medium mr-4 text-zinc-200 group-data-[hover]:text-zinc-200/80">
                     Learn about Rostr

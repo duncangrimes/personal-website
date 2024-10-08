@@ -214,8 +214,10 @@ export default async function Home() {
              Entrepreneur, <br/> Full stack developer, <br/> Machine learning engineer.
           </h1>
           <p className="mt-6 text-base text-zinc-400">
-            I’m Duncan Grimes, a senior at Vanderbilt University graduating in spring 2025, with 
-            majors in Applied Mathematics and Computer Science and a minor in Business.
+            I&#39;m Duncan Grimes, a senior at Vanderbilt University graduating in Spring 2025.
+            I will be graduating with majors in Applied Mathematics and Computer Science, as well as a minor in Business.
+            <br/><br/>
+            Please enjoy reading about some projects I&#39;ve worked on and try a demo of the Rostr platform I built in summer 2024.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
@@ -224,7 +226,7 @@ export default async function Home() {
               icon={GitHubIcon}
             />
             <SocialLink
-              href="https://www.linkedin.com/in/duncan-grimes-a84641230/"
+              href={process.env.LINKEDIN_URL || '#'}
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />

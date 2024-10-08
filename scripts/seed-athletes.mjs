@@ -10,17 +10,9 @@ async function populateUniversities(universities) {
   }
 }
 
-async function deleteUniversities(universities) {
-  for (const university of universities) {
-    try {
-      await prisma.university.delete({
-        where:
-          {name: university.name},
-      });
-    } catch (e) {
-      console.error(`Failed to delete university ${university}: ${e.message}`);
-    }
-  }
+async function deleteUniversities() {
+  await prisma.university.deleteMany();
+  console.log('All universities have been deleted');
 }
 
 async function populateSubjects(subjects) {;
@@ -33,17 +25,8 @@ async function populateSubjects(subjects) {;
   }
   
 async function deleteSubjects(subjects) {
-  for (const subject of subjects) {
-    try {
-      await prisma.subject.delete({
-        where: {
-          name: subject,
-        },
-      });
-    } catch (e) {
-      console.error(`Failed to delete subject ${subject}: ${e.message}`);
-    }
-  }
+  await prisma.subject.deleteMany();
+  console.log('All subjects have been deleted');
 }
 
 async function populateSports(sports) {
@@ -55,17 +38,8 @@ async function populateSports(sports) {
 }
 
 async function deleteSports(sports) {
-  for (const sport of sports) {
-    try {
-      await prisma.sport.delete({
-        where: {
-          name: sport,
-        },
-      });
-    } catch (e) {
-      console.error(`Failed to delete sport ${sport}: ${e.message}`);
-    }
-  }
+  await prisma.sport.deleteMany();
+  console.log('All sports have been deleted');
 }
 
 async function populateLocations(locations) {
@@ -83,51 +57,55 @@ async function populateLocations(locations) {
   }
 }}
 
-async function deleteLocations(locations) {
-  for (const location of locations) {
-    try {
-      await prisma.location.delete({
-        where: {
-          city_state_country: {
-            city: location.city,
-            state: location.state,
-            country: 'US',
-          }
-        },
-      });
-    } catch (e) {
-      console.error(`Failed to delete location ${location}: ${e.message}`);
-    }
-  }
+async function deleteLocations() {
+  await prisma.location.deleteMany();
+  console.log('All locations have been deleted');
 }
   
-  async function deleteUsers(athletes) {
-    for (const athlete of athletes) {
-      try {
-        await prisma.user.delete({
-          where: {
-            email: athlete.email,
-          },
-        });
-      } catch (e) {
-        console.error(`Failed to delete user ${athlete.email}: ${e.message}`);
-      }
-    }
+  async function deleteUsers() {
+    await prisma.user.deleteMany();
+    await prisma.athlete.deleteMany();
+    console.log('All users have been deleted');
   }
   
-  async function addUsersAndAthletes(athletes) {
+  async function addUsersAndAthletes(femaleFirstNames, maleFirstNames, lastNames, maleProfilePics, femaleProfilePics, N) {
     const subjects = await prisma.subject.findMany();
     const universities = await prisma.university.findMany();
     const sports = await prisma.sport.findMany();
     const locations = await prisma.location.findMany();
+
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June', 
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const linkedIn = process.env.LINKEDIN_URL;
+    const resume = process.env.RESUME_URL;
   
+    if (! linkedIn || ! resume) throw new Error('Please provide a LINKEDIN_URL and RESUME_URL environment variable');
+
     if (subjects.length === 0) {
       throw new Error('Please ensure there are subjects in the database before seeding athletes.');
     }
   
-    for (const athlete of athletes) {
+    for (let i = 0; i < N; i++) {
+
+      const isFemale = i < N / 2; // First half will be female, second half male
+      const firstName = isFemale
+      ? femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)]
+      : maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)];
+
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+
+      const profilePic = isFemale
+      ? femaleProfilePics[Math.floor(Math.random() * femaleProfilePics.length)]
+      : maleProfilePics[Math.floor(Math.random() * maleProfilePics.length)];
+    
       const majorSubject = subjects[Math.floor(Math.random() * subjects.length)];
       let secondMajorSubject = null;
+
+
+      
       if (Math.random() < 0.33) {
         do {
           secondMajorSubject = subjects[Math.floor(Math.random() * subjects.length)];
@@ -145,7 +123,10 @@ async function deleteLocations(locations) {
       }
 
       const university = universities[Math.floor(Math.random() * universities.length)];
-      const sport = sports[Math.floor(Math.random() * sports.length)];
+      const sport = isFemale 
+      ? sports.filter(s => s.name !== 'Football')[Math.floor(Math.random() * sports.filter(s => s.name !== 'Football').length)]
+      : sports[Math.floor(Math.random() * sports.length)];
+
       const hometown = locations[Math.floor(Math.random() * locations.length)];
       const desiredLocations = [];
 
@@ -156,20 +137,22 @@ async function deleteLocations(locations) {
         }
       }
 
-      const gpa = Math.random() < 0.5 ? null : (Math.random() * 3 + 1).toFixed(2);
+      const gpa = (Math.random() + 3).toFixed(2);
+      const gradYear = (Math.floor(Math.random() * (2025 - 2020 + 1)) + 2020).toString();; 
+      const gradMonth = months[Math.floor(Math.random() * months.length)];
 
       await prisma.user.create({
         data: {
-          firstName: athlete.firstName,
-          lastName: athlete.lastName,
-          email: athlete.email,
-          image: '/rostr/rostr-athlete-profile.jpeg',
+          firstName,
+          lastName,
+          email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
+          image: profilePic,
           athlete: {
             create: {
               university: { connect: { id: university.id } },
               sport: { connect: { id: sport.id } },
-              gradYear: athlete.gradYear,
-              gradMonth: athlete.gradMonth,
+              gradYear: gradYear,
+              gradMonth: gradMonth,
               gpa: gpa ? parseFloat(gpa) : null,
               majors: {
                 create: [
@@ -200,8 +183,8 @@ async function deleteLocations(locations) {
                   location: { connect: { id: location.id } },
                 })),
               },
-            ...(athlete.resume && { resume: athlete.resume }),
-            ...(athlete.linkedIn && { linkedIn: athlete.linkedIn }),
+              linkedIn,
+              resume,
             },
           },
         },
@@ -210,38 +193,6 @@ async function deleteLocations(locations) {
   }
 
   async function main() {
-    const athletes = [
-      { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', gradYear: '2024', gradMonth: 'May', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf', linkedIn: 'https://example.com/linkedin/john' },
-      { firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@example.com', gradYear: '2023', gradMonth: 'June', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Mike', lastName: 'Johnson', email: 'mike.johnson@example.com', gradYear: '2022', gradMonth: 'July', linkedIn: 'https://example.com/linkedin/mike' },
-      { firstName: 'Emily', lastName: 'Davis', email: 'emily.davis@example.com', gradYear: '2025', gradMonth: 'August' },
-      { firstName: 'Chris', lastName: 'Brown', email: 'chris.brown@example.com', gradYear: '2021', gradMonth: 'September', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Amanda', lastName: 'Williams', email: 'amanda.williams@example.com', gradYear: '2026', gradMonth: 'October', linkedIn: 'https://example.com/linkedin/amanda' },
-      { firstName: 'David', lastName: 'Jones', email: 'david.jones@example.com', gradYear: '2023', gradMonth: 'November' },
-      { firstName: 'Sarah', lastName: 'Miller', email: 'sarah.miller@example.com', gradYear: '2024', gradMonth: 'December', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf', linkedIn: 'https://example.com/linkedin/sarah' },
-      { firstName: 'James', lastName: 'Wilson', email: 'james.wilson@example.com', gradYear: '2022', gradMonth: 'January', linkedIn: 'https://example.com/linkedin/james' },
-      { firstName: 'Laura', lastName: 'Moore', email: 'laura.moore@example.com', gradYear: '2025', gradMonth: 'February' },
-      { firstName: 'Robert', lastName: 'Taylor', email: 'robert.taylor@example.com', gradYear: '2024', gradMonth: 'March', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Megan', lastName: 'Anderson', email: 'megan.anderson@example.com', gradYear: '2023', gradMonth: 'April', linkedIn: 'https://example.com/linkedin/megan' },
-      { firstName: 'Brian', lastName: 'Thomas', email: 'brian.thomas@example.com', gradYear: '2022', gradMonth: 'May' },
-      { firstName: 'Jessica', lastName: 'Jackson', email: 'jessica.jackson@example.com', gradYear: '2025', gradMonth: 'June', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf', linkedIn: 'https://example.com/linkedin/jessica' },
-      { firstName: 'Charles', lastName: 'White', email: 'charles.white@example.com', gradYear: '2021', gradMonth: 'July', linkedIn: 'https://example.com/linkedin/charles' },
-      { firstName: 'Hannah', lastName: 'Harris', email: 'hannah.harris@example.com', gradYear: '2026', gradMonth: 'August' },
-      { firstName: 'Joshua', lastName: 'Martin', email: 'joshua.martin@example.com', gradYear: '2023', gradMonth: 'September', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Olivia', lastName: 'Thompson', email: 'olivia.thompson@example.com', gradYear: '2024', gradMonth: 'October', linkedIn: 'https://example.com/linkedin/olivia' },
-      { firstName: 'Daniel', lastName: 'Garcia', email: 'daniel.garcia@example.com', gradYear: '2022', gradMonth: 'November' },
-      { firstName: 'Sophia', lastName: 'Martinez', email: 'sophia.martinez@example.com', gradYear: '2025', gradMonth: 'December', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Ethan', lastName: 'Robinson', email: 'ethan.robinson@example.com', gradYear: '2024', gradMonth: 'January', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf', linkedIn: 'https://example.com/linkedin/ethan' },
-      { firstName: 'Isabella', lastName: 'Clark', email: 'isabella.clark@example.com', gradYear: '2023', gradMonth: 'February', linkedIn: 'https://example.com/linkedin/isabella' },
-      { firstName: 'Mason', lastName: 'Rodriguez', email: 'mason.rodriguez@example.com', gradYear: '2022', gradMonth: 'March' },
-      { firstName: 'Ava', lastName: 'Lewis', email: 'ava.lewis@example.com', gradYear: '2025', gradMonth: 'April', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Logan', lastName: 'Lee', email: 'logan.lee@example.com', gradYear: '2021', gradMonth: 'May', linkedIn: 'https://example.com/linkedin/logan' },
-      { firstName: 'Mia', lastName: 'Walker', email: 'mia.walker@example.com', gradYear: '2026', gradMonth: 'June' },
-      { firstName: 'Alexander', lastName: 'Hall', email: 'alexander.hall@example.com', gradYear: '2023', gradMonth: 'July', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-      { firstName: 'Abigail', lastName: 'Allen', email: 'abigail.allen@example.com', gradYear: '2024', gradMonth: 'August' },
-      { firstName: 'Benjamin', lastName: 'Young', email: 'benjamin.young@example.com', gradYear: '2022', gradMonth: 'September', linkedIn: 'https://example.com/linkedin/benjamin' },
-      { firstName: 'Grace', lastName: 'King', email: 'grace.king@example.com', gradYear: '2025', gradMonth: 'October', resume: 'https://57eifsubqcf2mqap.public.blob.vercel-storage.com/rostr_resume-va0VeCrDGBjBDk9nZHNtPvZsG1L6zJ.pdf' },
-    ];
     
     const subjects = [
       'Computer Science',
@@ -250,46 +201,92 @@ async function deleteLocations(locations) {
       'Physics',
       'Psychology',
       'Political Science',
-      'Sociology'
+      'Sociology',
+      'Economics',
+      'English',
+      'History',
       ]
       const universities = [
-        { name: 'Harvard University', state: 'MA' },
+        { name: 'Vanderbilt University', state: 'MA' },
         { name: 'Stanford University', state: 'CA' },
         { name: 'MIT', state: 'MA' },
-        { name: 'Boston University', state: 'MA' },
+        { name: 'University of Notre Dame', state: 'MA' },
         { name: 'University of Miami', state: 'FL' },
-        { name: 'University of Illinois', state: 'IL' },
-        { name: 'University of Wisconsin-Madison', state: 'WI' }
+        { name: 'Indiana University', state: 'IN' },
+        { name: 'University of Wisconsin-Madison', state: 'WI' },
+        { name: 'University of Southern California', state: 'CA' },
+        { name: 'University of Pennsylvania', state: 'PA' },
+        { name: 'Duke University', state: 'NC' },
+        { name: 'University of Michigan', state: 'MI' },
+        { name: 'Northwestern University', state: 'IL' },
       ];
     const locations = [
       { city: 'New York', state: 'NY' },
       { city: 'Los Angeles', state: 'CA' },
       { city: 'Chicago', state: 'IL' },
-      { city: 'Houston', state: 'TX' },
+      { city: 'Dallas', state: 'TX' },
       { city: 'Phoenix', state: 'AZ' },
       { city: 'Philadelphia', state: 'PA' },
-      { city: 'San Antonio', state: 'TX' },
-      { city: 'San Diego', state: 'CA' }
+      { city: 'Nashville', state: 'TN' },
+      { city: 'San Francisco', state: 'CA' }
     ]
 
     const sports = [
       'Basketball',
       'Soccer',
+      'Volleyball',
       'Baseball',
       'Football',
-      'Tennis'
+      'Tennis',
+      'Track and Field',
+      'Swimming',
     ];
-    await deleteUniversities(universities);
-    await deleteSports(sports);
-    await deleteLocations(locations);
-    await deleteSubjects(subjects);
-    await deleteUsers(athletes);
+
+    const femaleFirstNames = [
+      "Emma", "Olivia", "Ava", "Sophia", "Isabella", 
+      "Mia", "Charlotte", "Amelia", "Harper", "Evelyn", 
+      "Abigail", "Emily", "Ella", "Elizabeth", "Sofia", 
+      "Avery", "Scarlett", "Madison", "Lily", "Victoria"
+    ];
+    
+    const maleFirstNames = [
+      "Liam", "Noah", "Oliver", "Elijah", "James", 
+      "Will", "Ben", "Lucas", "Henry", "Alex", 
+      "Michael", "Jack", "Tom", "Ethan", "Jacob", 
+      "Aiden", "Matt", "Sam", "David", "Joseph"
+    ];
+    
+    const lastNames = [
+      "Smith", "Johnson", "Williams", "Jones", "Brown", 
+      "Davis", "Miller", "Wilson", "Moore", "Taylor", 
+      "Anderson", "Thomas", "Jackson", "White", "Harris", 
+      "Martin", "Thompson", "Garcia", "Martinez", "Robinson"
+    ];
+
+    const femaleProfilePics = [
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp1-yjDd63ZEmERG93on5X4q9n1HkkPrGq.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp2-6xqchVQM6iJ3WD1h7xRFBUdGXVI0uw.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp3-nDVHvCxTtDtOrCj73Do4m7CH7W4mVz.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp4-mPJTUZZwvMudgP9403q9IkdxA0y9Qt.jpg'
+    ]
+
+    const maleProfilePics = [
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/male-profile-pics/mp1-gCOhRHAKregDLZ387p8L2Ua0J7xIQ4.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/male-profile-pics/mp2-BlNYOJvx8LorLCq10OsguTqFNwbahm.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/male-profile-pics/mp3-J693hkHiYzCRSGi6k7Vx61uEwVZbtF.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/male-profile-pics/mp4-DHCiX5nxk9axvr6EkxMZlf6TZFCEIY.jpg'
+    ]
+
+    await deleteSports();
+    await deleteUniversities()
+    await deleteLocations();
+    await deleteSubjects();
+    await deleteUsers();
   
     await populateUniversities(universities);
     await populateSports(sports);
     await populateLocations(locations);
     await populateSubjects(subjects);
-    await addUsersAndAthletes(athletes);
+    await addUsersAndAthletes(femaleFirstNames, maleFirstNames, lastNames, maleProfilePics, femaleProfilePics, 20);
   }
-
 main();
