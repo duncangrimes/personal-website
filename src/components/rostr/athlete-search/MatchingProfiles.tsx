@@ -13,7 +13,7 @@ export default function MatchingProfiles() {
         <div className=''>
             {isPending ? 
             <h2 className="text-2xl text-gray-200 font-bold mb-8">
-                Loading Rostrs...
+                Loading Athletes...
             </h2>
              :
             <div>
