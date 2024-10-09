@@ -61,7 +61,7 @@ export default async function AdminPage (){
                         <ul className="list-decimal mt-2 text-zinc-400 ml-6">
                             <li><span className="text-rostr-purple">Create </span> a new Rostr&mdash;an open position an employer wants to fill with a student-athlete.</li>
                             <li><span className="text-rostr-purple">Filter </span> athletes and add them to your Rostr.</li>
-                            <li><span className="text-rostr-purple">Send </span> your Rostr to the employer&#39;s email inbox.</li>
+                            <li><span className="text-rostr-purple">Send </span> your Rostr to the employer&#39;s email inbox, where they can find their perfect candidate.</li>
                         </ul>
                     </div>
                 
