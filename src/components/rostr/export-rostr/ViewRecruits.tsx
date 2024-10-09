@@ -52,8 +52,8 @@ export default function ViewRecruits({rostrId}: {rostrId: string}) {
         <div className='py-10'>
             <div className="inline-flex justify-between w-full">
                     <h2 className="text-2xl text-gray-200 font-bold mb-8">
-                        {loadingRecruits ? <span>{`Loading Candidates...`}</span> :
-                        <span>{athletes.length} Candidates</span>}
+                        {loadingRecruits ? <span>{`Loading Athletes...`}</span> :
+                        <span>{athletes.length} Athletes</span>}
                     </h2>
             </div>
             {(athletes.length < 1) ?
