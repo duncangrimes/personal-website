@@ -43,7 +43,7 @@ model User {
   name          String?
   firstName     String?
   lastName      String?
-  email         String?   @unique
+  email         String? 
   emailVerified DateTime?
   phone         String?
   image         String?

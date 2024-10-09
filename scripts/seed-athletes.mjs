@@ -264,7 +264,7 @@ async function deleteLocations() {
     ];
 
     const femaleProfilePics = [
-      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp1-yjDd63ZEmERG93on5X4q9n1HkkPrGq.jpg',
+      'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp1-u92GX4YXC5RcstxzRjJW53v53xIc9U.jpg',
       'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp2-6xqchVQM6iJ3WD1h7xRFBUdGXVI0uw.jpg',
       'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp3-nDVHvCxTtDtOrCj73Do4m7CH7W4mVz.jpg',
       'https://isieuvdfysya85mr.public.blob.vercel-storage.com/images/female-profile-pics/fp4-mPJTUZZwvMudgP9403q9IkdxA0y9Qt.jpg'
@@ -287,6 +287,6 @@ async function deleteLocations() {
     await populateSports(sports);
     await populateLocations(locations);
     await populateSubjects(subjects);
-    await addUsersAndAthletes(femaleFirstNames, maleFirstNames, lastNames, maleProfilePics, femaleProfilePics, 20);
+    await addUsersAndAthletes(femaleFirstNames, maleFirstNames, lastNames, maleProfilePics, femaleProfilePics, 100);
   }
 main();

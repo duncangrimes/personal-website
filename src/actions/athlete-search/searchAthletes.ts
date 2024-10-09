@@ -132,9 +132,18 @@ async function searchAthletes(filters: FilterOption[], page: number = 1): Promis
             }
           }
         },
-        orderBy: {
-          createdAt: 'desc', // Order by createdAt date in descending order
-        },
+        orderBy: [
+          {
+            user: {
+              lastName: 'asc',
+            },
+          },
+          {
+            user: {
+              firstName: 'asc',
+            },
+          },
+        ]
       });
       
       return athletes.map(athlete => ({
