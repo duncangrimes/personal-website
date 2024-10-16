@@ -8,10 +8,10 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/tailwindui/SocialIcons'
-import logoAirbnb from '~/public/images/logos/airbnb.svg'
-import logoFacebook from '~/public/images/logos/facebook.svg'
-import logoPlanetaria from '~/public/images/logos/planetaria.svg'
-import logoStarbucks from '~/public/images/logos/starbucks.svg'
+import cnx from '~/public/images/logos/cnx.png'
+import mastros from '~/public/images/logos/mastros.png'
+import rostr from '~/public/images/logos/rostr.png'
+import bc from '~/public/images/logos/bc.jpeg'
 import { type ArticleInfo, articleList } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import Link from 'next/link'
@@ -123,7 +123,7 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800 ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+          <Image src={role.logo} alt="" className={`h-7 w-7 ${role.company === 'q' ? '' : 'rounded-full'}`} unoptimized />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -151,35 +151,39 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   let resume: Array<Role> = [
     {
-      company: 'Planetaria',
-      title: 'CEO',
-      logo: logoPlanetaria,
-      start: '2019',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
+      company: 'Connexity',
+      title: 'Machine Learning Intern',
+      logo: cnx,
+      start: 'Jul 2022',
+      end: 'Aug 2023',
     },
     {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
+      company: 'Rostr',
+      title: 'CTO | Founding Engineer',
+      logo: rostr,
+      start: 'Mar 2024',
+      end: 'Sep 2024',
     },
     {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
+      company: 'Connexity',
+      title: 'Software Engineer Intern',
+      logo: cnx,
+      start: 'May 2023',
+      end: 'Aug 2023',
     },
     {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
+      company: `Mastro's Ocean Club`,
+      title: `Server's Assistant`,
+      logo: mastros,
+      start: 'May 2022',
+      end: 'Aug 2022',
+    },
+    {
+      company: 'Beach Camp',
+      title: 'Coach',
+      logo: bc,
+      start: 'Jun 2020',
+      end: 'Aug 2021',
     },
   ]
 
@@ -187,16 +191,19 @@ function Resume() {
     <div className="rounded-2xl border border-zinc-100 p-6 border-zinc-700/40">
       <h2 className="flex text-sm font-semibold  text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        <span className="ml-3">Resume</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
-        Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition  group-hover:stroke-zinc-50 group-active:stroke-zinc-50" />
+      <Button href="/resume" variant="secondary" className="group mt-6 w-full">
+        View Full Resume
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+
       </Button>
     </div>
   )
@@ -242,9 +249,9 @@ export default async function Home() {
               <Article key={article.title} article={article} />
             ))}
           </div>
-          {/* <div className="space-y-10 lg:pl-16 xl:pl-24">
+          <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Resume />
-          </div> */}
+          </div>
         </div>
       </Container>
     </>
