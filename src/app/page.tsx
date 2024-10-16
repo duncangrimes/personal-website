@@ -154,8 +154,8 @@ function Resume() {
       company: 'Connexity',
       title: 'Machine Learning Intern',
       logo: cnx,
-      start: 'Jul 2022',
-      end: 'Aug 2023',
+      start: 'Jul 2024',
+      end: 'Aug 2024',
     },
     {
       company: 'Rostr',
@@ -191,7 +191,7 @@ function Resume() {
     <div className="rounded-2xl border border-zinc-100 p-6 border-zinc-700/40">
       <h2 className="flex text-sm font-semibold  text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Resume</span>
+        <span className="ml-3">Work History</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
