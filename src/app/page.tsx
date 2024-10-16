@@ -11,7 +11,7 @@ import {
 import cnx from '~/public/images/logos/cnx.png'
 import mastros from '~/public/images/logos/mastros.png'
 import rostr from '~/public/images/logos/rostr.png'
-import bc from '~/public/images/logos/bc.jpeg'
+import bc from '~/public/images/logos/bc.png'
 import { type ArticleInfo, articleList } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import Link from 'next/link'
