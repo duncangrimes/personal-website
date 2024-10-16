@@ -159,7 +159,7 @@ function Resume() {
     },
     {
       company: 'Rostr',
-      title: 'CTO | Founding Engineer',
+      title: 'Co-Founder | CTO',
       logo: rostr,
       start: 'Mar 2024',
       end: 'Sep 2024',
