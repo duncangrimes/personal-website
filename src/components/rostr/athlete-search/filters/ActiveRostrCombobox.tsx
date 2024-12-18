@@ -61,7 +61,7 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
     <div className='flex flex-row'>
       <span className={'font-medium text-gray-200 self-center pr-2'}>Rostr: </span>
       <Combobox value={selectedRostr} onChange={(value) => setSelectedRostr(value)} onClose={() => setQuery('')}>
-        <div className="relative z-20">
+        <div className="relative z-5">
           <ComboboxInput onClick={() => setQuery('')} placeholder="Select a Rostr"
             className={clsx(
               'w-60 sm:w-80 rounded-lg border-none bg-white/20 py-1.5 pr-8 pl-3 text-sm/6 text-white',
@@ -79,7 +79,7 @@ export default function ActiveRostrCombobox({rostrId}: {rostrId?: string}) {
           anchor="bottom"
           transition
           className={clsx(
-            'w-[var(--input-width)] z-20 rounded-xl border border-white/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible',
+            'w-[var(--input-width)] z-8 rounded-xl border border-white/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible',
             'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
           )}
         >
