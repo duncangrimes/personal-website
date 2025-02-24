@@ -18,7 +18,7 @@ export const articleList: ArticleInfo[] = [
     href: 'https://www.vanderbiltfusion.org/',
   },
   {
-    title: 'ratAItoille',
+    title: 'rat-AI-toille',
     description: `I created an experimental random recipe generator with some of my friends and classmates.
     We used a dataset of 5,000 recipes to train a series of ML models to generate a random dish, determine the ingredients for that recipe,
     and then generate an image of the finished product.`,
@@ -32,12 +32,12 @@ export const articleList: ArticleInfo[] = [
     date: '2024-03-01',
     href: '/rostr',
   },
-  // {
-  //   title: 'ML text-classification model',
-  //   description: '',
-  //   date: '2024-07-01',
-  //   href: '/articles/vanderbilt-fusion-project',
-  // },
+  {
+    title: 'ML Fire Detection',
+    description: '',
+    date: '2025-02-01',
+    href: '/articles/fire-detection',
+  },
 ].sort((a, z) => +new Date(z.date) - +new Date(a.date))
 
 
