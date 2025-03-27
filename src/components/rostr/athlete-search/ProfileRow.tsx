@@ -78,8 +78,7 @@ export default function ProfileRow({ athlete }: {athlete: AthleteAfterSignup }) 
         >
             <div className="flex sm:flex-row flex-col w-full">
                 <div className="flex flex-row sm:mr-4 justify-between flex-shrink-0">
-                     <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full w-20 h-20 object-cover" />
-
+                     {/* <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full w-20 h-20 object-cover" /> */}
 
                     {rostr && <Button onClick={onButtonClick}
                             disabled={isPending}
