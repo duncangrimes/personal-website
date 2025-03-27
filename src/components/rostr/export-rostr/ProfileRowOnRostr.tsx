@@ -91,8 +91,7 @@ export default function ProfileRowOnRostr({ athlete, rostrId }: {athlete: Athlet
         >
             <div className="flex sm:flex-row flex-col">
                 <div className="flex flex-row justify-between">
-                     <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full mr-4 w-20 h-20 object-cover" />
-
+                     {/* <Image src={athlete.image} alt={athlete.firstName + " " + athlete.lastName} width={100} height={100} className="rounded-full mr-4 w-20 h-20 object-cover" /> */}
 
                     {rostr && <Button onClick={onButtonClick}
                             disabled={isPending}

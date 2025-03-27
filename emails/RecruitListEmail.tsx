@@ -33,15 +33,15 @@ const RecruitListEmail: React.FC<RecruitListEmailProps> = ({ orderedAthletes, ro
                             <Section key={idx} className='w-full border-b-[20px] border-gray-800'>
 
                                 {/* Mobile Image */}
-                                <Row className='sm:hidden block'>
+                                {/* <Row className='sm:hidden block'>
                                     <Img src={athlete.image} width='80' className="rounded-full mx-auto sm:hidden block"></Img>
-                                </Row>
+                                </Row> */}
 
 
                                 <Row className='block px-[8px]'>
                                     {/* Desktop Image */}
                                     <Column className="w-[100px] align-top sm:block hidden">
-                                        <Img src={athlete.image} width='80' className="rounded-full sm:block hidden"></Img>
+                                        {/* <Img src={athlete.image} width='80' className="rounded-full sm:block hidden"></Img> */}
                                     </Column>
                                     {/* Main Content */}
                                     <Column className = 'align-top'>
