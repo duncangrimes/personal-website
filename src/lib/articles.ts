@@ -32,12 +32,12 @@ export const articleList: ArticleInfo[] = [
     date: '2024-03-01',
     href: '/rostr',
   },
-  // {
-  //   title: 'ML text-classification model',
-  //   description: '',
-  //   date: '2024-07-01',
-  //   href: '/articles/vanderbilt-fusion-project',
-  // },
+  {
+    title: 'Fire Detection AI/ML',
+    description: 'For my culminating project at Vanderbilt, I tested and improved a binary classification model for detecting wildfires in an image. The model proved to be highly effective at detecting wildfires in low light conditions (at night), but struggled to detect fires in daylight.',
+    date: '2025-05-01',
+    href: '/fire-detection',
+  },
 ].sort((a, z) => +new Date(z.date) - +new Date(a.date))
 
 
