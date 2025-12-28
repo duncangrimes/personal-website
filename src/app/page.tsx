@@ -152,6 +152,13 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'Connexity',
+      title: 'Backend Software Engineer, ShopYourLikes',
+      logo: cnx,
+      start: 'Aug 2025',
+      end: 'Present',
+    },
+    {
+      company: 'Connexity',
       title: 'Machine Learning Intern',
       logo: cnx,
       start: 'Jul 2024',
@@ -166,7 +173,7 @@ function Resume() {
     },
     {
       company: 'Connexity',
-      title: 'Software Engineer Intern',
+      title: 'Software Engineer Intern, ShopYourLikes',
       logo: cnx,
       start: 'May 2023',
       end: 'Aug 2023',
@@ -221,12 +228,11 @@ export default async function Home() {
              Entrepreneur, <br/> Full stack developer, <br/> Machine learning engineer.
           </h1>
           <p className="mt-6 text-base text-zinc-400">
-            I&#39;m Duncan Grimes, a senior at Vanderbilt University graduating in Spring 2025.
-            I will be graduating with majors in Applied Mathematics and Computer Science, as well as a minor in Business.
+            Hello! I&#39;m Duncan Grimes, a software engineer with passions for machine learning and data science. I build REST APIs and databases to support <a href="https://www.shopyourlikes.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-zinc-100 underline">ShopYourLikes</a>, a platform that empowers influencers to monetize their content by posting retail affiliate links.
             <br/><br/>
-            Please enjoy reading about some projects I&#39;ve worked on and&nbsp;
-            <Link href={'/rostr'} className='underline text-zinc-300 hover:text-zinc-500'>try a demo</Link>
-            &nbsp;of the Rostr platform I built in Summer 2024.
+            I graduated from Vanderbilt University in Spring 2025, with degrees in Applied Mathematics and Computer Science, and a minor in Business.
+            <br/><br/>
+            Please enjoy reading about some personal projects I&#39;ve worked on so far!
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
