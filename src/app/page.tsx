@@ -151,7 +151,7 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   let resume: Array<Role> = [
     {
-      company: 'ShopYourLikes (Connexity)',
+      company: 'Connexity',
       title: 'Software Engineer I',
       logo: cnx,
       start: 'Aug 2025',
@@ -172,7 +172,7 @@ function Resume() {
       end: 'Sep 2024',
     },
     {
-      company: 'ShopYourLikes (Connexity)',
+      company: 'Connexity',
       title: 'Software Engineer Intern',
       logo: cnx,
       start: 'May 2023',
