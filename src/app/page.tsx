@@ -228,7 +228,7 @@ export default async function Home() {
              Entrepreneur, <br/> Full stack developer, <br/> Machine learning engineer.
           </h1>
           <p className="mt-6 text-base text-zinc-400">
-            Hello! I&#39;m Duncan Grimes, a software engineer with passions for machine learning and data science. I build REST APIs and databases to support <a href="https://www.shopyourlikes.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-zinc-100 underline">ShopYourLikes</a>, a platform that empowers influencers to monetize their content by posting retail affiliate links.
+            Hello! I&#39;m Duncan Grimes, a software engineer with passions for machine learning and data science. I design and implement systems to grow <a href="https://www.shopyourlikes.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-zinc-100 underline">ShopYourLikes</a>, a platform that empowers influencers to monetize their content by posting retail affiliate links.
             <br/><br/>
             I graduated from Vanderbilt University in Spring 2025, with degrees in Applied Mathematics and Computer Science, and a minor in Business.
             <br/><br/>
