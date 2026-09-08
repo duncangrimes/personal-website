@@ -152,10 +152,17 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'Connexity',
+      title: 'Software Engineer II',
+      logo: cnx,
+      start: 'Jul 2026',
+      end: 'Present',
+    },
+    {
+      company: 'Connexity',
       title: 'Software Engineer I',
       logo: cnx,
       start: 'Aug 2025',
-      end: 'Present',
+      end: 'Jul 2026',
     },
     {
       company: 'Connexity',
